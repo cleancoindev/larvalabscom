@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>larvalabs</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<link REL="STYLESHEET" TYPE="text/css" HREF="http://larvalabs.com/css/main.css" Title="main">
+
+</HEAD>
+<BODY BGCOLOR=#666666 LEFTMARGIN=0 TOPMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<center>
+<br><br>
+<TABLE WIDTH=770 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+<tr><td colspan="4" bgcolor="666666"><img src="http://larvalabs.com/oldimages/spacer.gif"></td></tr>
+	<TR>
+		<TD ROWSPAN=3>
+			<IMG SRC="http://larvalabs.com/oldimages/l.gif" WIDTH=40 HEIGHT=660 ALT=""></TD>
+		
+    <TD COLSPAN=2 BGCOLOR="FFFFFF"><TABLE WIDTH=688 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+	<TR>
+		<TD>
+			<a href="http://larvalabs.com/index.html"><IMG SRC="http://larvalabs.com/oldimages/larvalogo_top.gif" border="0" WIDTH=384 HEIGHT=53 ALT="Homepage"></a></TD>
+		  <TD ROWSPAN=5> <IMG SRC="images/largelogo_megamap.gif" ALT="" WIDTH=304 HEIGHT=321 border="0" usemap="#Map3">
+		  <br><center></center></TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/2_nodetail.gif" WIDTH=384 HEIGHT=61 ALT="">
+		<div class="menu" style="padding-top:23pt;padding-left:30pt"><a href="index.html">Summary</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="download.html">Download</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;Tutorial&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="documentation.html">Docs</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="http://megamap.sourceforge.net/api/index.html">Javadocs</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="http://sf.net/projects/megamap">Project Page</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="http://sourceforge.net/forum/forum.php?forum_id=440527">Help Forums</a>&nbsp;</div>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<IMG SRC="http://larvalabs.com/oldimages/3.gif" WIDTH=384 HEIGHT=34 ALT=""></TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/4_noline.gif" WIDTH=384 HEIGHT=74 ALT="">
+		<div style="padding-top:5pt;padding-left:40pt;padding-right:15pt">
+		<strong>What You Need</strong><p/>
+The distribution of MegaMap includes the three .jar files you need to use it. Those are:
+<ul>
+ <li><code>MegaMap-<i>VERSION</i>.jar</code>
+ <li><code>commons-collections-3.1.jar</code>
+
+ <li><code>commons-logging-1.0.3.jar</code>
+</ul>
+These three .jar files must be in the classpath of your application.
+MegaMaps is not very sensitive to the version of Commons Collections or Commons Logging, so feel free to use any
+version of Commons Collections after 2.0 and any verison of Commons Logging after 1.0.
+</div>
+		</TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/5.gif" WIDTH=384 HEIGHT=99 ALT="">
+		<div style="padding-top:5pt">
+		<table width="100%" border="0">
+</table>
+
+		</div>
+		</TD>
+	</TR>
+</TABLE></TD>
+		<TD ROWSPAN=3>
+			<IMG SRC="http://larvalabs.com/oldimages/r.gif" WIDTH=42 HEIGHT=660 ALT=""></TD>
+	</TR>
+
+
+	<TR>
+
+    <TD COLSPAN=2><TABLE WIDTH=688 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+
+<!-- ** Project details ** -->
+	<TR>
+
+<!-- Project type header -->
+		<TD bgcolor="FFFFFF" WIDTH=200 HEIGHT=121 ALT="">
+			          <div style="margin:10px 45px 15px 45px;width:598px;">
+
+<span class="heading">How To Use MegaMap</span><p/>
+MegaMap is very straightforward to use. There are two classes with which the user should become familiar:
+<code>com.larvalabs.megamap.MegaMap</code> and <code>com.larvalabs.megamap.MegaMapManager</code>.
+<code>MegaMap</code> is the class that actually provides the <code>put</code>, <code>get</code>, and <code>remove</code> methods
+that you would expect from a hashtable.
+The <code>MegaMapManager</code> is responsible for the lifecycle of a MegaMap.
+It is used to create and destroy MegaMaps.
+
+<p>
+The best way to demonstrate the use of these classes is with an example.
+The following main method creates a MegaMap, puts four objects in to the MegaMap, then retrieves and displays one of the
+objects from the map:
+<div class="code"><pre>
+import com.larvalabs.megamap.MegaMapManager;
+import com.larvalabs.megamap.MegaMap;
+
+public class MegaTest {
+
+    public static void main(String[] args) {
+        try {
+            // Get Manager singleton
+            MegaMapManager manager = MegaMapManager.getMegaMapManager();
+            {
+                // Create MegaMap with name "map1"
+                //  (the other two parameters will be discussed later)
+                MegaMap map = manager.createMegaMap("map1", false, false);
+                // Add some objects with Integer keys
+                map.put(new Integer(1), "Test Object 1");
+                map.put(new Integer(2), "Test Object 2");
+                map.put(new Integer(3), "Test Object 3");
+                map.put(new Integer(4), "Test Object 4");
+                // Retrieve and display one of the objects
+                String s = (String) map.get(new Integer(4));
+                System.out.println(s);
+                // Shutdown the manager
+                manager.shutdown();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+</pre></div>
+Consider this line from the above example:
+<div class="code"><pre>
+    MegaMap map = manager.createMegaMap("map1", false, false);
+</pre></div>
+Here, the method <code>MegaMapManager.createMegaMap(String name, boolean persistent, boolean overwriteOld)</code> is
+called.
+Each time this method is called, a new MegaMap is created.
+However, each new MegaMap must have a unique name or else an exception will be thrown.
+The name must consist of letters, numbers and the underscore character ('_') only.
+The next parameter, <code>persistent</code> indicates whether a persistent MegaMap should be used. If a MegaMap is labelled as persistent, then
+it will remain on disk after the virtual machine shuts down. It will be reloaded the next time a MegaMap is created
+with the same name, unless the last parameter, <code>overwriteOld</code>, is set to true.
+
+<p>
+Next, consider this line from the example:
+<div class="code"><pre>
+    manager.shutdown();
+</pre></div>
+This line shuts down all MegaMaps and does whatever clean-up work is necessary.
+For non-persistent MegaMaps this is not too important.
+However, it is vitally important that this is called before the virtual machine is shutdown for persistent MegaMaps.
+See the <a href="documentation.html">full documentation</a> for more information about this requirement.
+
+</div>
+    	</TD>
+<!-- Individual Project -->
+
+	</TR>
+<!-- ** Project details ** -->
+
+	<TR>
+		<TD COLSPAN=4>
+			<IMG SRC="http://larvalabs.com/oldimages/12.gif" WIDTH=688 HEIGHT=45 ALT=""></TD>
+	</TR>
+</TABLE></TD>
+	</TR>
+	<tr><td colspan="4" height="50%" bgcolor="666666"><img src="http://larvalabs.com/oldimages/spacer.gif"></td></tr>
+
+
+
+</TABLE>
+</center>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-191940-2";
+urchinTracker();
+</script>
+</body>
+</HTML>

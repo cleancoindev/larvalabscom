@@ -1,0 +1,69 @@
+/* CSS 3 document */
+/* 09/11/2010 */
+
+/** CSS RESET BY ERIC MEYER **/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td  { margin: 0; padding: 0; border: 0; 	outline: 0;  font-size: 100%; vertical-align: baseline; background: transparent;}
+body {line-height: 1;}
+ol, ul {list-style: none;}
+blockquote, q {quotes: none;}
+del {text-decoration: line-through;}
+table {border-collapse: collapse;	border-spacing: 0;}
+
+/** USEFUL CLASSES **/
+.left {float: left;}
+.right {float: right;}
+.clear {clear: both;}
+.hidden {display: none;}
+
+/* CLEARFIX */
+.clearfix:after {content: "."; display: block; visibility: hidden; clear: both; height: 0;}
+.clearfix {display: inline-block;}
+
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
+
+
+/** HOME PAGE **/
+body {background: #5c5c5b url(../images/back.jpg); font: 0.625em/1.5  helvetica, arial, sans-serif; text-align: center; padding-top: 5em; color: #666; padding-bottom: 40px;}
+div#container {margin: 0 auto; margin-bottom: 15px; width: 86em; background: #fff url(../images/paper_back.jpg); border-radius: 13px; -moz-border-radius: 13px; -webkit-border-radius: 13px; min-height: 30em; text-align: left;
+padding: 2em;
+-moz-box-shadow: 0px 3px 10px #333; box-shadow: 0px 3px 10px #333; -webkit-box-shadow: 0px 3px 10px #333;}
+a:link, a:visited {color: #666;}
+a:hover {color: #999;}
+a#logo:link, a#logo:visited {display: block; float: left; width: 133px; height: 140px; background: transparent url(../images/logo.png) no-repeat 0 0; position: relative; bottom: 5.3em; right: 0.8em;}
+a#logo:hover {background-position: -133px 0;}
+a#download:link, a#download:visited, #under_development {display: block; width: 214px; height: 51px; float: right; background: transparent url(../images/download_app.jpg) no-repeat 0 0;}
+#under_development {background: transparent url(../images/ud.png) no-repeat 0 0;}
+a#download:hover {background-position: -214px 0;}
+
+/** SLIDESHOW **/
+div#media {text-align: center; background: transparent url(../images/line.jpg) repeat-x bottom center; height: 680px; position: relative; bottom: 5em; position: relative;}
+div#media h2 {width: 612px; height: 68px; background: transparent url(../images/description.png) no-repeat 0 0; margin: 0 auto; position: absolute; z-index: 200; left: 125px; bottom: 90px;}
+
+div#slider {width: 833px; height: 533px; overflow: hidden; margin: 0 auto;}
+
+
+/** FEATURES **/
+ul#features {position: relative; left: 27px; padding-bottom: 80px;}
+ul#features li {float: left; margin-right: 40px; width: 240px;}
+ul#features li.last {margin-right: 0;}
+ul#features h3 {font-size: 2em; margin-bottom: 15px; }
+ul#features p {font-size: 1.4em; line-height: 1.4}
+ul#features img, ul#features a { display: block; margin-bottom: 15px;}
+
+/** video links**/
+a#video1:link, a#video1:visited, a#video2:link, a#video2:visited {display: block; width: 242px; height:186px;}
+a#video1:link, a#video1:visited {background: transparent url(../images/video1.jpg) no-repeat 0 0;}
+a#video2:link, a#video2:visited {background: transparent url(../images/video2.jpg) no-repeat 0 0;}
+a#video1:hover, a#video2:hover {background-position: -242px 0;} 
+
+div#footer {color: #BFBFBF; width: 860px; margin: 0 auto; font-size: 1.2em;}
+div#footer a:link, div#footer a:visited {color: #BFBFBF;}
+div#footer a:hover {color: #fff;}
+
+p#copyright {width: 500px; text-align: left; float: left; }
+p#share_this {width: 90px; float: right;}
+.st_sharethis_custom {display: block; width: 79px; height: 24px; background: transparent url(../images/share.png) no-repeat 0 0;}
+.st_sharethis_custom:hover {background-position: -79px 0; cursor: pointer;}

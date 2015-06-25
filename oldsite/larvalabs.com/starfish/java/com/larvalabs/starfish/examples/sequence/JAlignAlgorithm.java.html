@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+<META NAME="GENERATOR" CONTENT="Java2HTML Version 1.3.1">
+<TITLE>com.larvalabs.starfish.examples.sequence.JAlignAlgorithm (Java2HTML)</TITLE>
+</HEAD>
+<BODY><TABLE id="Header" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td colspan="2" width="33%">&nbsp;</td>
+<td align="center" colspan="2" width="33%">
+<font size="4">JAlignAlgorithm.java</font>
+</td>
+<td align="right" colspan="2" width="33%">&nbsp;</td>
+</tr>
+</TABLE>
+<pre ID="Classes">
+<FONT ID="LN">1 </FONT><A NAME="1"></A><FONT ID="Package">package</FONT> <A HREF="../../../../../com.larvalabs.starfish.examples.sequence.index.html" target="packageFrame">com.larvalabs.starfish.examples.sequence</A>;
+<FONT ID="LN">2 </FONT><A NAME="2"></A>
+<FONT ID="LN">3 </FONT><A NAME="3"></A><FONT ID="Import">import</FONT> <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/package-summary.html">com.larvalabs.starfish.algorithm.*</A>;
+<FONT ID="LN">4 </FONT><A NAME="4"></A><FONT ID="Import">import</FONT> <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/parameter/package-summary.html">com.larvalabs.starfish.algorithm.parameter.*</A>;
+<FONT ID="LN">5 </FONT><A NAME="5"></A><FONT ID="Import">import</FONT> <A HREF="../../../../../../api/com/larvalabs/starfish/util/Uuid.html">com.larvalabs.starfish.util.Uuid</A>;
+<FONT ID="LN">6 </FONT><A NAME="6"></A><FONT ID="Import">import</FONT> jaligner.Alignment;
+<FONT ID="LN">7 </FONT><A NAME="7"></A><FONT ID="Import">import</FONT> jaligner.Matrix;
+<FONT ID="LN">8 </FONT><A NAME="8"></A><FONT ID="Import">import</FONT> jaligner.Sequence;
+<FONT ID="LN">9 </FONT><A NAME="9"></A><FONT ID="Import">import</FONT> jaligner.SmithWatermanGotoh;
+<FONT ID="LN">10</FONT><A NAME="10"></A><FONT ID="Import">import</FONT> jaligner.formats.Format;
+<FONT ID="LN">11</FONT><A NAME="11"></A><FONT ID="Import">import</FONT> jaligner.formats.Pair;
+<FONT ID="LN">12</FONT><A NAME="12"></A><FONT ID="Import">import</FONT> jaligner.util.MatrixLoader;
+<FONT ID="LN">13</FONT><A NAME="13"></A><FONT ID="Import">import</FONT> org.apache.commons.logging.Log;
+<FONT ID="LN">14</FONT><A NAME="14"></A><FONT ID="Import">import</FONT> org.apache.commons.logging.LogFactory;
+<FONT ID="LN">15</FONT><A NAME="15"></A>
+<FONT ID="LN">16</FONT><A NAME="16"></A><FONT ID="Import">import</FONT> java.io.*;
+<FONT ID="LN">17</FONT><A NAME="17"></A>
+<FONT ID="LN">18</FONT><A NAME="18"></A><FONT ID="FormalComment">/**
+<FONT ID="LN">19</FONT><A NAME="19"></A> * Algorithm that does JAlign sequence alignment on DNA sequences.
+<FONT ID="LN">20</FONT><A NAME="20"></A> */</FONT>
+<FONT ID="LN">21</FONT><A NAME="21"></A><FONT ID="Public">public</FONT> <FONT ID="Class">class</FONT> JAlignAlgorithm <FONT ID="Extends">extends</FONT> <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/Algorithm.html">Algorithm</A> {
+<FONT ID="LN">22</FONT><A NAME="22"></A>
+<FONT ID="LN">23</FONT><A NAME="23"></A>    <FONT ID="FormalComment">/**
+<FONT ID="LN">24</FONT><A NAME="24"></A>     * Apache commons-logging Logging instance.
+<FONT ID="LN">25</FONT><A NAME="25"></A>     */</FONT>
+<FONT ID="LN">26</FONT><A NAME="26"></A>    <FONT ID="Static">static</FONT> Log log = LogFactory.getLog(<A HREF="JAlignAlgorithm.java.html">JAlignAlgorithm</A>.<FONT ID="Class">class</FONT>);
+<FONT ID="LN">27</FONT><A NAME="27"></A>
+<FONT ID="LN">28</FONT><A NAME="28"></A>    <FONT ID="SingleLineComment">// Stores the parameter values
+<FONT ID="LN">29</FONT><A NAME="29"></A></FONT>    <FONT ID="Private">private</FONT> String keySequence;
+<FONT ID="LN">30</FONT><A NAME="30"></A>    <FONT ID="Private">private</FONT> File dbSequenceFile;
+<FONT ID="LN">31</FONT><A NAME="31"></A>    <FONT ID="Private">private</FONT> <FONT ID="Long">long</FONT> dbSequenceLength;
+<FONT ID="LN">32</FONT><A NAME="32"></A>    <FONT ID="Private">private</FONT> <FONT ID="Int">int</FONT> segmentSize;
+<FONT ID="LN">33</FONT><A NAME="33"></A>    <FONT ID="Private">private</FONT> <FONT ID="Int">int</FONT> segmentOverlap;
+<FONT ID="LN">34</FONT><A NAME="34"></A>    <FONT ID="Private">private</FONT> String scoringMatrix;
+<FONT ID="LN">35</FONT><A NAME="35"></A>    <FONT ID="Private">private</FONT> <FONT ID="Float">float</FONT> openGapPenalty;
+<FONT ID="LN">36</FONT><A NAME="36"></A>    <FONT ID="Private">private</FONT> <FONT ID="Float">float</FONT> extendGapPenalty;
+<FONT ID="LN">37</FONT><A NAME="37"></A>    <FONT ID="Private">private</FONT> <FONT ID="Int">int</FONT> desiredSegmentation;
+<FONT ID="LN">38</FONT><A NAME="38"></A>
+<FONT ID="LN">39</FONT><A NAME="39"></A>    <FONT ID="SingleLineComment">// Constants that define the algorithm parameters and their descriptions.
+<FONT ID="LN">40</FONT><A NAME="40"></A></FONT>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> String PARAM_KEY_SEQUENCE = <FONT ID="StringLiteral">"key.sequence"</FONT>;
+<FONT ID="LN">41</FONT><A NAME="41"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> String DESC_KEY_SEQUENCE = <FONT ID="StringLiteral">"Search Sequence"</FONT>;
+<FONT ID="LN">42</FONT><A NAME="42"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> String PARAM_DB_SEQUENCE_FILENAME = <FONT ID="StringLiteral">"db.sequence.filename"</FONT>;
+<FONT ID="LN">43</FONT><A NAME="43"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> String DESC_DB_SEQUENCE_FILENAME = <FONT ID="StringLiteral">"DB Sequence File"</FONT>;
+<FONT ID="LN">44</FONT><A NAME="44"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> String PARAM_SCORING_MATRIX = <FONT ID="StringLiteral">"scoring.matrix"</FONT>;
+<FONT ID="LN">45</FONT><A NAME="45"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> String DESC_SCORING_MATRIX = <FONT ID="StringLiteral">"Scoring Matrix"</FONT>;
+<FONT ID="LN">46</FONT><A NAME="46"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> String PARAM_OPEN_GAP_PENALTY = <FONT ID="StringLiteral">"open.gap.penalty"</FONT>;
+<FONT ID="LN">47</FONT><A NAME="47"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> String DESC_OPEN_GAP_PENALTY = <FONT ID="StringLiteral">"Open Gap Penalty"</FONT>;
+<FONT ID="LN">48</FONT><A NAME="48"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> String PARAM_EXTEND_GAP_PENALTY = <FONT ID="StringLiteral">"extend.gap.penalty"</FONT>;
+<FONT ID="LN">49</FONT><A NAME="49"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> String DESC_EXTEND_GAP_PENALTY = <FONT ID="StringLiteral">"Extend Gap Penalty"</FONT>;
+<FONT ID="LN">50</FONT><A NAME="50"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> String PARAM_DESIRED_SEGMENTATION = <FONT ID="StringLiteral">"desired.segmentation"</FONT>;
+<FONT ID="LN">51</FONT><A NAME="51"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> String DESC_DESIRED_SEGMENTATION = <FONT ID="StringLiteral">"Desired Segmentation"</FONT>;
+<FONT ID="LN">52</FONT><A NAME="52"></A>
+<FONT ID="LN">53</FONT><A NAME="53"></A>    <FONT ID="FormalComment">/**
+<FONT ID="LN">54</FONT><A NAME="54"></A>     * These are scoring matrices available for DNA data.
+<FONT ID="LN">55</FONT><A NAME="55"></A>     */</FONT>
+<FONT ID="LN">56</FONT><A NAME="56"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> String[] SCORING_MATRICES =
+<FONT ID="LN">57</FONT><A NAME="57"></A>            {
+<FONT ID="LN">58</FONT><A NAME="58"></A>                <FONT ID="StringLiteral">"EDNAFULL"</FONT>,
+<FONT ID="LN">59</FONT><A NAME="59"></A>                <FONT ID="StringLiteral">"BLOSUM30"</FONT>,
+<FONT ID="LN">60</FONT><A NAME="60"></A>                <FONT ID="StringLiteral">"BLOSUM40"</FONT>,
+<FONT ID="LN">61</FONT><A NAME="61"></A>                <FONT ID="StringLiteral">"BLOSUM50"</FONT>,
+<FONT ID="LN">62</FONT><A NAME="62"></A>                <FONT ID="StringLiteral">"BLOSUM60"</FONT>,
+<FONT ID="LN">63</FONT><A NAME="63"></A>                <FONT ID="StringLiteral">"BLOSUM70"</FONT>,
+<FONT ID="LN">64</FONT><A NAME="64"></A>                <FONT ID="StringLiteral">"BLOSUM80"</FONT>,
+<FONT ID="LN">65</FONT><A NAME="65"></A>                <FONT ID="StringLiteral">"BLOSUM90"</FONT>
+<FONT ID="LN">66</FONT><A NAME="66"></A>            };
+<FONT ID="LN">67</FONT><A NAME="67"></A>
+<FONT ID="LN">68</FONT><A NAME="68"></A>    <FONT ID="FormalComment">/**
+<FONT ID="LN">69</FONT><A NAME="69"></A>     * This is the default segmentation that we will use if the user does not override it.
+<FONT ID="LN">70</FONT><A NAME="70"></A>     */</FONT>
+<FONT ID="LN">71</FONT><A NAME="71"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> <FONT ID="Int">int</FONT> DEFAULT_SEGMENTATION = <FONT ID="IntegerLiteral">100</FONT>;
+<FONT ID="LN">72</FONT><A NAME="72"></A>
+<FONT ID="LN">73</FONT><A NAME="73"></A>    <FONT ID="FormalComment">/**
+<FONT ID="LN">74</FONT><A NAME="74"></A>     * This returns a human-readable name for our algorithm.
+<FONT ID="LN">75</FONT><A NAME="75"></A>     * @return
+<FONT ID="LN">76</FONT><A NAME="76"></A>     */</FONT>
+<FONT ID="LN">77</FONT><A NAME="77"></A>    <FONT ID="Public">public</FONT> String getName() {
+<FONT ID="LN">78</FONT><A NAME="78"></A>        <FONT ID="Return">return</FONT> <FONT ID="StringLiteral">"Smith-Waterman-Gotoh Sequence Alignment"</FONT>;
+<FONT ID="LN">79</FONT><A NAME="79"></A>    }
+<FONT ID="LN">80</FONT><A NAME="80"></A>
+<FONT ID="LN">81</FONT><A NAME="81"></A>    <FONT ID="FormalComment">/**
+<FONT ID="LN">82</FONT><A NAME="82"></A>     * This method allows our algorithm to specify our parameters to Starfish.
+<FONT ID="LN">83</FONT><A NAME="83"></A>     * @param parameterSet we will use this object to set our parameters.
+<FONT ID="LN">84</FONT><A NAME="84"></A>     */</FONT>
+<FONT ID="LN">85</FONT><A NAME="85"></A>    <FONT ID="Public">public</FONT> <FONT ID="Void">void</FONT> setParameters(<A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/ParameterSet.html">ParameterSet</A> parameterSet) {
+<FONT ID="LN">86</FONT><A NAME="86"></A>        <FONT ID="SingleLineComment">// This is the key sequence that we are searching for. We use a regular expression for validation.
+<FONT ID="LN">87</FONT><A NAME="87"></A></FONT>        <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/parameter/StringType.html">StringType</A> keyParam = <FONT ID="New">new</FONT> <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/parameter/StringType.html">StringType</A>(PARAM_KEY_SEQUENCE, DESC_KEY_SEQUENCE, <FONT ID="True">true</FONT>, <FONT ID="IntegerLiteral">0</FONT>, <FONT ID="StringLiteral">"[atgcATGC]*"</FONT>, <FONT ID="StringLiteral">"Key sequence must be a nucleic sequence."</FONT>, <FONT ID="Null">null</FONT>);
+<FONT ID="LN">88</FONT><A NAME="88"></A>        keyParam.setExpectingLargeInput(<FONT ID="True">true</FONT>);
+<FONT ID="LN">89</FONT><A NAME="89"></A>        parameterSet.addParameter(keyParam);
+<FONT ID="LN">90</FONT><A NAME="90"></A>        <FONT ID="SingleLineComment">// This is the filename of the large, databse sequence. This must exist on the node that is creating the problem.
+<FONT ID="LN">91</FONT><A NAME="91"></A></FONT>        <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/parameter/FileType.html">FileType</A> fileParam = <FONT ID="New">new</FONT> <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/parameter/FileType.html">FileType</A>(PARAM_DB_SEQUENCE_FILENAME, DESC_DB_SEQUENCE_FILENAME, <FONT ID="True">true</FONT>, <FONT ID="Null">null</FONT>, <FONT ID="Null">null</FONT>);
+<FONT ID="LN">92</FONT><A NAME="92"></A>        parameterSet.addParameter(fileParam);
+<FONT ID="LN">93</FONT><A NAME="93"></A>        <FONT ID="SingleLineComment">// This is the scoring matrix to use. Note that we specify a default value.
+<FONT ID="LN">94</FONT><A NAME="94"></A></FONT>        <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/parameter/SelectorType.html">SelectorType</A> scoreParam = <FONT ID="New">new</FONT> <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/parameter/SelectorType.html">SelectorType</A>(PARAM_SCORING_MATRIX, DESC_SCORING_MATRIX, <FONT ID="True">true</FONT>, SCORING_MATRICES, SCORING_MATRICES[<FONT ID="IntegerLiteral">0</FONT>]);
+<FONT ID="LN">95</FONT><A NAME="95"></A>        parameterSet.addParameter(scoreParam);
+<FONT ID="LN">96</FONT><A NAME="96"></A>        <FONT ID="SingleLineComment">// This is the penalty incurred for opening a gap between the key and DB sequences. It defaults to 10.
+<FONT ID="LN">97</FONT><A NAME="97"></A></FONT>        <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/parameter/FloatType.html">FloatType</A> openGapParam = <FONT ID="New">new</FONT> <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/parameter/FloatType.html">FloatType</A>(PARAM_OPEN_GAP_PENALTY, DESC_OPEN_GAP_PENALTY, <FONT ID="True">true</FONT>, <FONT ID="New">new</FONT> Float(<FONT ID="FloatPointLiteral">10f</FONT>));
+<FONT ID="LN">98</FONT><A NAME="98"></A>        parameterSet.addParameter(openGapParam);
+<FONT ID="LN">99</FONT><A NAME="99"></A>        <FONT ID="SingleLineComment">// This is the penalty incurred for continuing an already-opened gap. It defaults to 0.5.
+<FONT ID="LN">00</FONT><A NAME="100"></A></FONT>        <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/parameter/FloatType.html">FloatType</A> extendGapParam = <FONT ID="New">new</FONT> <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/parameter/FloatType.html">FloatType</A>(PARAM_EXTEND_GAP_PENALTY, DESC_EXTEND_GAP_PENALTY, <FONT ID="True">true</FONT>, <FONT ID="New">new</FONT> Float(<FONT ID="FloatPointLiteral">0.5f</FONT>));
+<FONT ID="LN">01</FONT><A NAME="101"></A>        parameterSet.addParameter(extendGapParam);
+<FONT ID="LN">02</FONT><A NAME="102"></A>        <FONT ID="SingleLineComment">// This is an optional parameter. It allows the user to specify how segmented they would like the problem's
+<FONT ID="LN">03</FONT><A NAME="103"></A></FONT>        <FONT ID="SingleLineComment">// computation to be. If not specified, the algorithm will determine a good value on its own.
+<FONT ID="LN">04</FONT><A NAME="104"></A></FONT>        <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/parameter/IntegerType.html">IntegerType</A> segmentationParam = <FONT ID="New">new</FONT> <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/parameter/IntegerType.html">IntegerType</A>(PARAM_DESIRED_SEGMENTATION, DESC_DESIRED_SEGMENTATION, <FONT ID="False">false</FONT>, <FONT ID="Null">null</FONT>);
+<FONT ID="LN">05</FONT><A NAME="105"></A>        parameterSet.addParameter(segmentationParam);
+<FONT ID="LN">06</FONT><A NAME="106"></A>    }
+<FONT ID="LN">07</FONT><A NAME="107"></A>
+<FONT ID="LN">08</FONT><A NAME="108"></A>    <FONT ID="FormalComment">/**
+<FONT ID="LN">09</FONT><A NAME="109"></A>     * This method passes in the values for the our specified parameters.
+<FONT ID="LN">10</FONT><A NAME="110"></A>     * These are guaranteed to be valid according to the requirements we specified in {@link #setParameters(com.larvalabs.starfish.algorithm.ParameterSet)}.
+<FONT ID="LN">11</FONT><A NAME="111"></A>     * @param parameters the parameter values.
+<FONT ID="LN">12</FONT><A NAME="112"></A>     */</FONT>
+<FONT ID="LN">13</FONT><A NAME="113"></A>    <FONT ID="Public">public</FONT> <FONT ID="Void">void</FONT> initialize(<A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/Parameters.html">Parameters</A> parameters) {
+<FONT ID="LN">14</FONT><A NAME="114"></A>        keySequence = (String) parameters.getParameter(PARAM_KEY_SEQUENCE);
+<FONT ID="LN">15</FONT><A NAME="115"></A>        segmentOverlap = keySequence.length();
+<FONT ID="LN">16</FONT><A NAME="116"></A>        dbSequenceFile = (File) parameters.getParameter(PARAM_DB_SEQUENCE_FILENAME);
+<FONT ID="LN">17</FONT><A NAME="117"></A>        scoringMatrix = (String) parameters.getParameter(PARAM_SCORING_MATRIX);
+<FONT ID="LN">18</FONT><A NAME="118"></A>        openGapPenalty = ((Float) parameters.getParameter(PARAM_OPEN_GAP_PENALTY)).floatValue();
+<FONT ID="LN">19</FONT><A NAME="119"></A>        extendGapPenalty = ((Float) parameters.getParameter(PARAM_EXTEND_GAP_PENALTY)).floatValue();
+<FONT ID="LN">20</FONT><A NAME="120"></A>        Integer segmentation = (Integer)parameters.getParameter(PARAM_DESIRED_SEGMENTATION);
+<FONT ID="LN">21</FONT><A NAME="121"></A>        <FONT ID="If">if</FONT> (segmentation != <FONT ID="Null">null</FONT>) {
+<FONT ID="LN">22</FONT><A NAME="122"></A>            desiredSegmentation = segmentation.intValue();
+<FONT ID="LN">23</FONT><A NAME="123"></A>        } <FONT ID="Else">else</FONT> {
+<FONT ID="LN">24</FONT><A NAME="124"></A>            desiredSegmentation = DEFAULT_SEGMENTATION;
+<FONT ID="LN">25</FONT><A NAME="125"></A>        }
+<FONT ID="LN">26</FONT><A NAME="126"></A>    }
+<FONT ID="LN">27</FONT><A NAME="127"></A>
+<FONT ID="LN">28</FONT><A NAME="128"></A>    <FONT ID="FormalComment">/**
+<FONT ID="LN">29</FONT><A NAME="129"></A>     * Here we compute the total number of segments.
+<FONT ID="LN">30</FONT><A NAME="130"></A>     * We try to use the desired segmentation requested by the user.
+<FONT ID="LN">31</FONT><A NAME="131"></A>     * @return the total number of segments for this problem.
+<FONT ID="LN">32</FONT><A NAME="132"></A>     */</FONT>
+<FONT ID="LN">33</FONT><A NAME="133"></A>    <FONT ID="Public">public</FONT> <FONT ID="Int">int</FONT> totalNumberOfSegments() {
+<FONT ID="LN">34</FONT><A NAME="134"></A>        dbSequenceLength = dbSequenceFile.length();
+<FONT ID="LN">35</FONT><A NAME="135"></A>        segmentSize = (<FONT ID="Int">int</FONT>)Math.max(dbSequenceLength/desiredSegmentation, <FONT ID="IntegerLiteral">10</FONT> * segmentOverlap);
+<FONT ID="LN">36</FONT><A NAME="136"></A>        log.debug(<FONT ID="StringLiteral">"Segment size: "</FONT> + segmentSize);
+<FONT ID="LN">37</FONT><A NAME="137"></A>        <FONT ID="Double">double</FONT> k = <FONT ID="IntegerLiteral">1</FONT> + ((<FONT ID="Double">double</FONT>) dbSequenceLength - segmentSize) / (segmentSize - segmentOverlap);
+<FONT ID="LN">38</FONT><A NAME="138"></A>        <FONT ID="Return">return</FONT> (<FONT ID="Int">int</FONT>) Math.ceil(k);
+<FONT ID="LN">39</FONT><A NAME="139"></A>    }
+<FONT ID="LN">40</FONT><A NAME="140"></A>
+<FONT ID="LN">41</FONT><A NAME="141"></A>    <FONT ID="FormalComment">/**
+<FONT ID="LN">42</FONT><A NAME="142"></A>     * This generates the overlapping subsequences that we will search in order to find the optimal match.
+<FONT ID="LN">43</FONT><A NAME="143"></A>     * @param segmentInputData this is where we register the subsequences as Starfish segment data.
+<FONT ID="LN">44</FONT><A NAME="144"></A>     */</FONT>
+<FONT ID="LN">45</FONT><A NAME="145"></A>    <FONT ID="Public">public</FONT> <FONT ID="Void">void</FONT> generateSegmentInputData(<A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/SegmentInputData.html">SegmentInputData</A> segmentInputData) {
+<FONT ID="LN">46</FONT><A NAME="146"></A>        <FONT ID="Try">try</FONT> {
+<FONT ID="LN">47</FONT><A NAME="147"></A>            <FONT ID="Int">int</FONT> k = totalNumberOfSegments();
+<FONT ID="LN">48</FONT><A NAME="148"></A>            BufferedReader in = <FONT ID="New">new</FONT> BufferedReader(<FONT ID="New">new</FONT> InputStreamReader(<FONT ID="New">new</FONT> FileInputStream(dbSequenceFile)));
+<FONT ID="LN">49</FONT><A NAME="149"></A>            <FONT ID="Long">long</FONT> charsRemaining = dbSequenceLength;
+<FONT ID="LN">50</FONT><A NAME="150"></A>            <FONT ID="Char">char</FONT>[] lastSegment = <FONT ID="Null">null</FONT>;
+<FONT ID="LN">51</FONT><A NAME="151"></A>            <FONT ID="Long">long</FONT> segmentStartIndex = <FONT ID="IntegerLiteral">0</FONT>;
+<FONT ID="LN">52</FONT><A NAME="152"></A>            <FONT ID="For">for</FONT> (<FONT ID="Int">int</FONT> i = <FONT ID="IntegerLiteral">0</FONT>; i &lt; k; i++) {
+<FONT ID="LN">53</FONT><A NAME="153"></A>                <FONT ID="Int">int</FONT> currentSegmentSize = segmentSize;
+<FONT ID="LN">54</FONT><A NAME="154"></A>                <FONT ID="If">if</FONT> (segmentSize &gt; charsRemaining) {
+<FONT ID="LN">55</FONT><A NAME="155"></A>                    currentSegmentSize = (<FONT ID="Int">int</FONT>) charsRemaining;
+<FONT ID="LN">56</FONT><A NAME="156"></A>                }
+<FONT ID="LN">57</FONT><A NAME="157"></A>                <FONT ID="Char">char</FONT>[] segment = <FONT ID="New">new</FONT> <FONT ID="Char">char</FONT>[currentSegmentSize];
+<FONT ID="LN">58</FONT><A NAME="158"></A>                <FONT ID="Int">int</FONT> j = <FONT ID="IntegerLiteral">0</FONT>;
+<FONT ID="LN">59</FONT><A NAME="159"></A>                <FONT ID="If">if</FONT> (lastSegment != <FONT ID="Null">null</FONT>) {
+<FONT ID="LN">60</FONT><A NAME="160"></A>                    <FONT ID="Int">int</FONT> lastIndex = lastSegment.length - segmentOverlap;
+<FONT ID="LN">61</FONT><A NAME="161"></A>                    <FONT ID="While">while</FONT> (j &lt; segmentOverlap) {
+<FONT ID="LN">62</FONT><A NAME="162"></A>                        segment[j] = lastSegment[lastIndex];
+<FONT ID="LN">63</FONT><A NAME="163"></A>                        j++;
+<FONT ID="LN">64</FONT><A NAME="164"></A>                        lastIndex++;
+<FONT ID="LN">65</FONT><A NAME="165"></A>                    }
+<FONT ID="LN">66</FONT><A NAME="166"></A>                }
+<FONT ID="LN">67</FONT><A NAME="167"></A>                <FONT ID="Int">int</FONT> charsToRead = currentSegmentSize - j;
+<FONT ID="LN">68</FONT><A NAME="168"></A>                in.read(segment, j, charsToRead);
+<FONT ID="LN">69</FONT><A NAME="169"></A>                String segmentString = <FONT ID="New">new</FONT> String(segment);
+<FONT ID="LN">70</FONT><A NAME="170"></A>                segmentInputData.setSegmentInputData(i, <FONT ID="New">new</FONT> <A HREF="SequenceSegment.java.html">SequenceSegment</A>(segmentString, segmentStartIndex - segmentOverlap));
+<FONT ID="LN">71</FONT><A NAME="171"></A>                charsRemaining -= charsToRead;
+<FONT ID="LN">72</FONT><A NAME="172"></A>                segmentStartIndex += charsToRead;
+<FONT ID="LN">73</FONT><A NAME="173"></A>                lastSegment = segment;
+<FONT ID="LN">74</FONT><A NAME="174"></A>            }
+<FONT ID="LN">75</FONT><A NAME="175"></A>            in.close();
+<FONT ID="LN">76</FONT><A NAME="176"></A>        } <FONT ID="Catch">catch</FONT> (Exception e) {
+<FONT ID="LN">77</FONT><A NAME="177"></A>            log.error(<FONT ID="StringLiteral">"Could not read db sequence!"</FONT>, e);
+<FONT ID="LN">78</FONT><A NAME="178"></A>        }
+<FONT ID="LN">79</FONT><A NAME="179"></A>    }
+<FONT ID="LN">80</FONT><A NAME="180"></A>
+<FONT ID="LN">81</FONT><A NAME="181"></A>    <FONT ID="FormalComment">/**
+<FONT ID="LN">82</FONT><A NAME="182"></A>     * This is the "meat" of the algorithm. Here we compute the optimal alignment of the key sequence with the
+<FONT ID="LN">83</FONT><A NAME="183"></A>     * subsequence passed to us in &lt;code&gt;segmentData&lt;/cope&gt;
+<FONT ID="LN">84</FONT><A NAME="184"></A>     * @param segmentNum the index of this segment.
+<FONT ID="LN">85</FONT><A NAME="185"></A>     * @param segmentData the segment data-- in this case it is a subsequence.
+<FONT ID="LN">86</FONT><A NAME="186"></A>     * @return we return the best alignment result together with scoring information about the alignment.
+<FONT ID="LN">87</FONT><A NAME="187"></A>     */</FONT>
+<FONT ID="LN">88</FONT><A NAME="188"></A>    <FONT ID="Public">public</FONT> Serializable processSegment(<FONT ID="Int">int</FONT> segmentNum, Object segmentData) {
+<FONT ID="LN">89</FONT><A NAME="189"></A>        <FONT ID="Try">try</FONT> {
+<FONT ID="LN">90</FONT><A NAME="190"></A>            <A HREF="SequenceSegment.java.html">SequenceSegment</A> segment = (<A HREF="SequenceSegment.java.html">SequenceSegment</A>) segmentData;
+<FONT ID="LN">91</FONT><A NAME="191"></A>            String dbSequence = segment.getSequence();
+<FONT ID="LN">92</FONT><A NAME="192"></A>            Sequence s1 = <FONT ID="New">new</FONT> Sequence(keySequence, <FONT ID="StringLiteral">"Key"</FONT>, <FONT ID="StringLiteral">"Key Sequence"</FONT>, Sequence.NUCLEIC);
+<FONT ID="LN">93</FONT><A NAME="193"></A>            Sequence s2 = <FONT ID="New">new</FONT> Sequence(dbSequence, <FONT ID="StringLiteral">"DB"</FONT>, <FONT ID="StringLiteral">"Database Sequence"</FONT>, Sequence.NUCLEIC);
+<FONT ID="LN">94</FONT><A NAME="194"></A>            Matrix matrix = MatrixLoader.load(scoringMatrix);
+<FONT ID="LN">95</FONT><A NAME="195"></A>            Alignment alignment = SmithWatermanGotoh.align(s1, s2, matrix, openGapPenalty, extendGapPenalty);
+<FONT ID="LN">96</FONT><A NAME="196"></A>            alignment.setStart2((<FONT ID="Int">int</FONT>)(alignment.getStart2() + segment.getStartIndex()));
+<FONT ID="LN">97</FONT><A NAME="197"></A>            <A HREF="AlignmentResult.java.html">AlignmentResult</A> result = <FONT ID="New">new</FONT> <A HREF="AlignmentResult.java.html">AlignmentResult</A>(alignment);
+<FONT ID="LN">98</FONT><A NAME="198"></A>            <FONT ID="Return">return</FONT> result;
+<FONT ID="LN">99</FONT><A NAME="199"></A>        } <FONT ID="Catch">catch</FONT> (Exception e) {
+<FONT ID="LN">00</FONT><A NAME="200"></A>            log.error(<FONT ID="StringLiteral">"Error processing alignment!"</FONT>, e);
+<FONT ID="LN">01</FONT><A NAME="201"></A>            <FONT ID="Return">return</FONT> <FONT ID="Null">null</FONT>;
+<FONT ID="LN">02</FONT><A NAME="202"></A>        }
+<FONT ID="LN">03</FONT><A NAME="203"></A>    }
+<FONT ID="LN">04</FONT><A NAME="204"></A>
+<FONT ID="LN">05</FONT><A NAME="205"></A>    <FONT ID="FormalComment">/**
+<FONT ID="LN">06</FONT><A NAME="206"></A>     * Finally, we will determine which segment found the best alignment and report that as the optimal.
+<FONT ID="LN">07</FONT><A NAME="207"></A>     * @param results the Universally-Unique Identifiers of the results.
+<FONT ID="LN">08</FONT><A NAME="208"></A>     * @param resources a handle for acquiring the segment result resources.
+<FONT ID="LN">09</FONT><A NAME="209"></A>     * @return the problem result, in the case a string with the resulting alignment and score.
+<FONT ID="LN">10</FONT><A NAME="210"></A>     */</FONT>
+<FONT ID="LN">11</FONT><A NAME="211"></A>    <FONT ID="Public">public</FONT> <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/ProblemResult.html">ProblemResult</A> processResults(<A HREF="../../../../../../api/com/larvalabs/starfish/util/Uuid.html">Uuid</A>[] results, <A HREF="../../../../../../api/com/larvalabs/starfish/algorithm/Resources.html">Resources</A> resources) {
+<FONT ID="LN">12</FONT><A NAME="212"></A>        <A HREF="AlignmentResult.java.html">AlignmentResult</A> best = <FONT ID="Null">null</FONT>;
+<FONT ID="LN">13</FONT><A NAME="213"></A>        <FONT ID="For">for</FONT> (<FONT ID="Int">int</FONT> i = <FONT ID="IntegerLiteral">0</FONT>; i &lt; results.length; i++) {
+<FONT ID="LN">14</FONT><A NAME="214"></A>            <A HREF="../../../../../../api/com/larvalabs/starfish/util/Uuid.html">Uuid</A> uuid = (<A HREF="../../../../../../api/com/larvalabs/starfish/util/Uuid.html">Uuid</A>) results[i];
+<FONT ID="LN">15</FONT><A NAME="215"></A>            <A HREF="AlignmentResult.java.html">AlignmentResult</A> result = (<A HREF="AlignmentResult.java.html">AlignmentResult</A>) resources.getResource(uuid);
+<FONT ID="LN">16</FONT><A NAME="216"></A>            <FONT ID="If">if</FONT> ((best == <FONT ID="Null">null</FONT>) || (best.getScore() &lt; result.getScore())) {
+<FONT ID="LN">17</FONT><A NAME="217"></A>                best = result;
+<FONT ID="LN">18</FONT><A NAME="218"></A>            }
+<FONT ID="LN">19</FONT><A NAME="219"></A>        }
+<FONT ID="LN">20</FONT><A NAME="220"></A>        Alignment alignment = best.getAlignment();
+<FONT ID="LN">21</FONT><A NAME="221"></A>        log.debug(<FONT ID="StringLiteral">"Start1: "</FONT> + alignment.getStart1());
+<FONT ID="LN">22</FONT><A NAME="222"></A>        log.debug(<FONT ID="StringLiteral">"Start2: "</FONT> + alignment.getStart2());
+<FONT ID="LN">23</FONT><A NAME="223"></A>        Format format = <FONT ID="New">new</FONT> Pair();
+<FONT ID="LN">24</FONT><A NAME="224"></A>        log.debug(<FONT ID="StringLiteral">"Score: "</FONT> + alignment.getScore());
+<FONT ID="LN">25</FONT><A NAME="225"></A>        String output = <FONT ID="StringLiteral">"Score: "</FONT> + alignment.getScore() + <FONT ID="StringLiteral">"\nAlignment:\n"</FONT> + format.format(alignment);        
+<FONT ID="LN">26</FONT><A NAME="226"></A>        log.debug(output);
+<FONT ID="LN">27</FONT><A NAME="227"></A>        <FONT ID="Return">return</FONT> ProblemResult.createStringProblemResult(output);
+<FONT ID="LN">28</FONT><A NAME="228"></A>    }
+<FONT ID="LN">29</FONT><A NAME="229"></A>}
+<FONT ID="LN">30</FONT><A NAME="230"></A></pre>
+</BODY>
+</HTML>

@@ -1,0 +1,198 @@
+
+/** CSS FOR LARVA LABS BLOG 2010 **/
+/** BY: Alvaro Casanova - http://www.yeahstyledg.com **/
+
+/***************************************************************************************/
+/******************************************* ACTIVE LINKS ******************************/
+/***************************************************************************************/
+
+div#header li#blog a:link, div#header li#blog a:visited {background-position: -168px 0;}
+div#header li#blog a:hover {background-position: -84px 0;}
+
+
+/*****************************************************************************************/
+/************************************* GENERAL *******************************************/
+/*****************************************************************************************/
+div#content.blog_content {margin-top: 26px; padding: 0 0 20px 18px;}
+#epaplayer_0 {visibility:hidden;}
+/** BLOG TITLE **/
+h3#blog_title {width: 583px; background: url("../blog_images/what_we_say.gif") no-repeat 0 0;}
+
+/****************************************************************************************/
+/******************************************  ENTRIES ***********************************/
+/****************************************************************************************/
+div#blogentries  {width: 583px; float: left; font-size: 120%; margin-right: 39px;}
+div.blogentry {margin-bottom: 80px;}
+
+/** ENTRY INFO **/
+div.entryinfo {width: 87px; float: left;}
+div.entryinfo img {display: block; margin-bottom: -10px;}
+div.entryinfo div.entrydate {width: 70px; text-align: center; position: relative; right: 5px;} 
+div.entryinfo div.entrydate .day {display: block; font-size: 400%; margin-bottom: -25px;}
+div.entryinfo div.entrydate .month, div.entryinfo div.entrydate .year {display: block; font-size: 200%; text-transform: uppercase; letter-spacing: -1px;}
+div.entryinfo div.entrydate .month {margin-bottom: -10px;}
+div.entryinfo div.entrydate .year  {font-size: 170%; margin-bottom: 15px;}
+
+div.commentsnumber {width: 42px; height: 33px; text-align: center; margin-left: 9px; background: url("../blog_images/comments_icon.gif") no-repeat 0 0; padding-top: 1px;}
+div.commentsnumber a, div.commentsnumber a:link, div.commentsnumber a:visited  {color: #85d3f1; text-decoration: none; font-weight: bold; }
+div.commentsnumber a:hover {color: #fff;}
+
+/** ENTRY TEXT **/
+div.entrybody {width: 473px; float: left; border-left: 1px solid #214e5f; padding-left: 20px; min-height: 300px;}
+div.entrybody a {font-weight: bold; text-decoration: none;}
+div.entrybody h1 {margin-bottom: 0.4em;}
+div.entrybody h1 a:link, div.entrybody h1 a:visited {color: #c09001; font-size: 180%; font-weight: bold; letter-spacing: -1px; text-decoration: none; line-height: 1.3;}
+div.entrybody h1 a:hover {color: #febf04;}
+#blogentries .blogentry h2 {color: #c09001; margin-bottom: 0.5em; font-weight: bold;}
+div.entrybody p, div.entrybody ul {margin-bottom: 1em;}
+div.entrybody p.post_info {margin-bottom: 1.5em; font-size: 80%;}
+div.entrybody ul li {padding-left: 18px; margin-bottom: 0.5em; background: url("../images/bullet.gif") no-repeat 0 7px;}
+
+/*****************************************************************************************/
+/****************************************** SIDEBAR *************************************/
+/***************************************************************************************/
+
+/** general **/
+div#sidecontent {width: 260px; float: left; position: relative; bottom: 115px;} 
+/** headers **/
+div#content.general_content div#sidecontent h3 {margin-bottom: 0; width: 196px; height: 13px; margin-bottom: 20px; overflow: hidden; text-indent: -9999px;}
+ul.xoxo li {padding-left: 22px;}
+
+
+/** SEARCH BOX **/
+
+/** APPLY CLEARFIX **/
+/* CLEARFIX */
+#search:after {content: "."; display: block; visibility: hidden; clear: both; height: 0;}
+#search {display: inline-block;}
+
+/* Hides from IE-mac \*/
+* html #search {height: 1%;}
+#search {display: block;}
+/* End hide from IE-mac */
+
+#search {height: 60px; background: url("../blog_images/search_back.png") no-repeat 0 0; padding: 20px 0 0 20px; margin-bottom: 20px;}
+#search label {display: none;}
+#search #s, #search #searchsubmit {border: none; display: block; float: left;}
+#search #searchsubmit {text-indent: -9999px; width: 48px; height: 35px; background: url("../blog_images/submit_button.gif") no-repeat 0 0;}
+#search #searchsubmit:hover {cursor: pointer; background-position: -48px 0;}
+#search #s {width: 156px; height: 21px; font-size: 110%; color: #6eaac0; margin-right: 7px; padding: 7px 5px; background: none;}
+
+
+
+/********************************************************************* FEAT APP *********************************************************************************/
+div#content.general_content div#sidecontent li#text-374992345 h3 {background: url("../blog_images/feat_h.gif") no-repeat 0 0; margin-bottom: 5px;}
+li#text-374992345 h4 {font-weight: bold; color: #b7d0e3; font-size: 120%; margin-bottom: 10px;}
+
+
+/********************************************************************** ARCHIVES ********************************************************************************/
+/** APPLY CLEARFIX **/
+/* CLEARFIX */
+#archives-2:after {content: "."; display: block; visibility: hidden; clear: both; height: 0;}
+#archives-2 {display: inline-block; margin-bottom: 40px;}
+
+/* Hides from IE-mac \*/
+* html #archives-2 {height: 1%;}
+#archives-2 {display: block;}
+/* End hide from IE-mac */
+
+div#content.general_content div#sidecontent li#archives-2 h3 {background: url("../blog_images/arch_h.gif") no-repeat 0 0; height: 14px;}
+div#content.general_content li#archives-2 ul {padding: 0; margin: 0;}
+div#content.general_content li#archives-2 ul li {padding: 0; margin: 0; float: left; margin-right: 10px; width: 100px; }
+div#content.general_content li#archives-2 ul li a {font-size: 80%; color: #6e8597; text-decoration: none;}
+div#content.general_content li#archives-2 ul li a:hover {color: #b4d5ef;}
+
+
+
+
+/********************************************************************** CATEGORIES ********************************************************************************/
+li#categories-2 {margin-bottom: 40px;}
+li#categories-2 h3 {background: url("../blog_images/cat_h.gif") no-repeat 0 0;}
+div#content.general_content li#categories-2 ul li  {padding: 0; margin: 0; margin-bottom: 15px;}
+div#content.general_content li#categories-2 ul li a {text-decoration: none; font-weight: bold; font-size: 120%; letter-spacing: -1px; display: block; width: 130px; padding: 10px 0 10px 60px;}
+div#content.general_content li#categories-2 ul li a:hover {text-decoration: underline;}
+
+/** icons **/
+li.cat-item-8 a {background: url("../blog_images/ipad_icon.gif") no-repeat center left;}
+li.cat-item-5 a {background: url("../blog_images/android_icon.gif") no-repeat center left;}
+li.cat-item-4 a {background: url("../blog_images/iphone_icon.gif") no-repeat center left;}
+li.cat-item-6 a {background: url("../blog_images/larvalabs_icon.gif") no-repeat center left;}
+li.cat-item-7 a {background: url("../blog_images/nerd_icon.gif") no-repeat center left;}
+li.cat-item-3 a {background: url("../blog_images/sidekick_icon.gif") no-repeat center left;}
+
+/** hide uncategorized elements **/
+li.cat-item-1 {display: none;}
+
+
+/********************************************************************** TWITTER ***********************************************************************************/
+div#content.general_content #twitter-1 h3 {background: url("../blog_images/twitter_h.gif") no-repeat 0 0;}
+div#content.general_content li#twitter-1 ul li  {padding: 0; margin: 0; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #214e5f; width: 200px;}
+
+
+/** RSS LINKS **/
+li#text-374992346 a, li#text-374992347 a, li#text-374992348 a  {display: block; width: 150px; height: 24px; text-indent: -9999px; overflow: hidden; margin-bottom: 15px;}
+/** news only **/
+li#text-374992346 a:link, li#text-374992346 a:visited {background: url("../blog_images/news.gif") no-repeat 0 0; width: 108px;}
+/** nerdy stuff **/
+li#text-374992347 a:link, li#text-374992347 a:visited {background: url("../blog_images/nerdy_stuff.gif") no-repeat 0 0; width: 150px;}
+/** all **/
+li#text-374992348 a:link, li#text-374992348 a:visited {background: url("../blog_images/all.gif") no-repeat 0 0; width: 55px;}
+
+/** hover states **/
+ul.widget_blog_subscribe li {padding-left: 0;}
+li#text-374992346 a:hover {background-position: -108px 0;}
+li#text-374992347 a:hover {background-position: -150px 0;}
+li#text-374992348 a:hover {background-position: -55px 0;}
+
+/** NEXT AND PREVIOUS LINKS **/
+#prev_next_links {width: 500px; margin-left: 110px; margin-top: -50px; margin-bottom: 20px;}
+span.previous-blog a:link,span.previous-blog a:visited, span.next-blog a:link, span.next-blog a:visited {display: block; float: left; text-align: center; background: #3D86A2; color: #fff; padding: 0 20px; height: 30px; line-height: 30px; font-size: 80%; text-decoration: none; text-transform: uppercase; border-radius: 5px; -moz-border-radius:5px; -webkit-border-radius: 5px;}
+span.next-blog a:link, span.next-blog a:visited {float: right;}
+span.previous-blog a:hover, span.next-blog a:hover {background: #53BADF;}
+
+
+
+
+/*********************************************************************************************/
+/****************************************** SINGLE ENTRY *************************************/
+/*********************************************************************************************/
+/** BACK LINK **/
+div.blog_back {clear: both; margin-bottom: 20px;}
+div.blog_back a:link, div.blog_back a:visited {display: block; float: right; text-align: center; background: #3D86A2; color: #fff; width: 100px; height: 30px; line-height: 30px; font-size: 80%; text-decoration: none; text-transform: uppercase; position: relative; top: 1em; left: 0.3em;}
+div.blog_back a:hover {background: #53BADF;}
+
+/** COMMENTS **/
+.comment {margin-bottom: 30px;}
+.response_number {width: 87px; float: left;}
+.response_content {width: 473px; float: left; border-left: 1px solid #214e5f; padding-left: 20px;}
+.response_content p {margin-bottom: 1em;}
+.says {margin-bottom: 1em;}
+.says strong {color: #79a7a9;}
+.comment-author {font-weight: bold; color: #8fb4d2;}
+
+
+
+
+/** TRACKBACKS **/
+div#content.general_content  h3#pings, div#content.general_content  h3#leave_a_comment, div#content.general_content  #trackback h3 {color: #c09001; font-weight: bold; height: 5px; margin-bottom: 30px;}
+div#content.general_content  h3#pings {display: none;}
+ol.pinglist {margin-bottom: 30px; display: none;}
+ol.pinglist li a {display: block; width: 100%; color: #0C495F; font-size: 80%; padding: 5px 0; text-decoration: none; padding-left: 10px;}
+ol.pinglist li a:hover {background: #0c3c4d; color: #fff;}
+
+/** COMMENTS FORM **/
+#comment_article {}
+#comment_article p {margin-bottom: 20px;}
+#comment_article label small {font-size: 80%; font-family: verdana, arial;}
+input#author, input#email, input#url, textarea#comment {background: #0E4052; border: none; width: 195px; padding: 10px 0; color: #94afc6; padding-left: 5px; margin-right: 20px; border-radius: 10px; -moz-border-radius:10px; -webkit-border-radius: 10px;}
+input#author:hover, input#email:hover, input#url:hover, textarea#comment:hover {background: #14576F;} 
+textarea#comment {width: 500px; height: 300px;}
+input#send {text-align: center; background: #3D86A2; color: #fff; width: 100px; padding: 10px 0; font-size: 80%; text-decoration: none; text-transform: uppercase; border: none; position: relative; left: 405px;  border-radius: 5px; -moz-border-radius:5px; -webkit-border-radius: 5px;} 
+input#send:hover {background: #53BADF; cursor: pointer;}
+
+#trackback {margin-bottom: -30px;}
+#trackback p {font-size: 75%;}
+
+
+/** PAGE TITLE **/
+h2.page-title {color: #3A7F9A; margin-bottom: 20px; font-weight: bold; font-size: 110%; padding-bottom: 10px; border-bottom: 1px solid #214e5f;}

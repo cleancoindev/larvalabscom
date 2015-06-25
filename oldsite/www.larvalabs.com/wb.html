@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>Winken, Blinken and Nod - The First iPad book with voice recognition!</title>
+
+	<link rel="stylesheet" href="wb/css/style.css" />
+
+	<link rel="shortcut icon" href="wb/favicon.ico">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+	<!-- modernizr -->
+	<script src="wb/js/libs/modernizr-1.7.min.js"></script>
+
+
+	<body>
+
+		<div id="wrapper">
+
+			<header class="png_bg">
+
+				<h1 class="ir png_bg">Winken, Blinken and Nod</h1>
+
+				<!-- animation -->
+				<div id="illustration" class="png_bg">
+
+					<!-- js disabled -->
+					<noscript><img id="boat-nojs" alt="" width="418" height="330" src="wb/images/boat_complete.png" /></noscript>
+
+					<!-- top clouds -->
+					<div id="top-clouds" class="png_bg"></div>
+
+				</div>
+				<!-- / animation -->
+
+			</header>
+
+			<div id="content" role="main">
+
+				<!-- video -->
+				<div id="video-container">
+					<div id="video-wrapper">
+
+						<noscript>
+
+							<!-- vimeo alternative -->
+
+							<object width="640" height="375"
+							classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B"
+							codebase="http://www.apple.com/qtactivex/qtplugin.cab">
+							<param name="src" value="video.m4v">
+							<param name="autoplay" value="true">
+							<param name="controller" value="true">
+
+							<embed src="wb/video.m4v" width="640" height="375"
+							autoplay="true" controller="true"
+							pluginspage="http://www.apple.com/quicktime/download/">
+							</embed>
+
+							</object>
+
+						</noscript>
+						<script>document.write("<iframe src='http://player.vimeo.com/video/27448319?title=0&amp;byline=0&amp;portrait=0' width='640' height='360' frameborder='0'></iframe>");</script>
+
+				</div>
+				</div>
+				<!-- / video -->
+
+
+
+				<!-- description -->
+				<div id="description">
+					<img alt="" src="wb/images/illustration.png" />
+					<p class="ir png_bg" >The first iPad book with voice recognition!</p>
+					<a href="http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=452411793" class="ir png_bg">Available on the iPad App Store</a>
+
+				</div>
+				<!-- /description -->
+
+				<!-- stars -->
+				<div id="star1-container" class="star-container .png_bg">
+					<img id="star1" class="star" alt="" src="wb/images/star.png" />
+				</div>
+				<div id="star2-container" class="star-container .png_bg">
+					<img id="star2" class="star" alt="" src="wb/images/star.png" />
+				</div>
+				<div id="star3-container" class="star-container .png_bg">
+					<img id="star3" class="star" alt="" src="wb/images/star.png" />
+				</div>
+				<div id="star4-container" class="star-container .png_bg">
+					<img id="star4" class="star" alt="" src="wb/images/star.png" />
+				</div>
+
+
+			</div>
+
+			<!-- content -->
+
+
+			<!-- footer -->
+			<footer>
+
+				<!-- logos -->
+				<ul class="clearfix">
+						<li>
+							<a id="rr" class="ir png_bg" href="http://robinrosenthal.virb.com">robinrosenthal.com</a>
+						</li>
+
+						<li class="last">
+							<a id="ll" class="ir png_bg" href="index.html">Larva Labs</a>
+						</li>
+
+						<!-- <p>&copy; 2011</p> -->
+
+				</ul>
+
+
+			<div id="share">
+					<span  class='st_twitter_button' displayText='Tweet'></span><span  class='st_facebook_button' displayText='Facebook'></span><span  class='st_plusone_button' ></span>
+			</div>
+
+
+			</footer>
+
+
+		</div>
+		<!-- / wrapper -->
+
+	</body>
+
+	<!-- jQuery Library -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+	<script>window.jQuery || document.write("<script src='wb/js/libs/jquery-1.5.1.min.js'>\x3C/script>")</script>
+
+	<!-- Tween Library -->
+	<script src="wb/js/libs/tween.js"></script>
+
+		<!-- invoke characters -->
+		<script src="wb/js/dino.js"></script>
+		<script src="wb/js/frog.js"></script>
+		<script src="wb/js/baby.js"></script>
+
+		<script>
+			//create non semantic code
+			jQuery(document).ready(function() {
+				Illustration.init();
+			});
+
+		</script>
+
+
+		<![if !IE]>
+
+				<script>
+					//create non semantic code
+					jQuery(document).ready(function() {
+						Illustration.disappear();
+					});
+
+					//animate characters
+					jQuery(window).load(function(){
+						Illustration.appear();
+					});
+
+				</script>
+
+
+		<![endif]>
+
+		<script>
+			//animate characters
+			jQuery(window).load(function(){
+				Dino.init();
+				Frog.init();
+			    Baby.init();
+			});
+		</script>
+
+
+		<!-- stars animation -->
+		<script src="wb/js/stars.js"></script>
+
+
+		<!-- boat animation -->
+		<script src="wb/js/boat.js"></script>
+
+
+
+		<!--[if lt IE 7 ]>
+		<script src="js/libs/dd_belatedpng.js"></script>
+		<script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+		<![endif]-->
+
+		<!-- share this -->
+		<script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'3f8567b5-e4b4-4ada-a61b-9a6510b890a1'});</script>
+
+
+	<!-- mathiasbynens.be/notes/async-analytics-snippet Change UA-XXXXX-X to be your site's ID
+	<script>
+		var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
+		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+		g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+		s.parentNode.insertBefore(g,s)}(document,"script"));
+	</script>	-->
+
+</html>

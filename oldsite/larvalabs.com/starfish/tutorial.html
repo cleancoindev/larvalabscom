@@ -1,0 +1,367 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>larvalabs</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<link REL="STYLESHEET" TYPE="text/css" HREF="http://larvalabs.com/css/main.css" Title="main">
+
+</HEAD>
+<BODY BGCOLOR=#666666 LEFTMARGIN=0 TOPMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<center>
+<br><br>
+<TABLE WIDTH=770 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+<tr><td colspan="4" bgcolor="666666"><img src="http://larvalabs.com/oldimages/spacer.gif"></td></tr>
+	<TR>
+		<TD ROWSPAN=3>
+			<IMG SRC="http://larvalabs.com/oldimages/l.gif" WIDTH=40 HEIGHT=660 ALT=""></TD>
+		
+    <TD COLSPAN=2 BGCOLOR="FFFFFF"><TABLE WIDTH=688 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+	<TR>
+		<TD>
+			<a href="http://larvalabs.com/index.html"><IMG SRC="http://larvalabs.com/oldimages/larvalogo_top.gif" border="0" WIDTH=384 HEIGHT=53 ALT="Homepage"></a></TD>
+		  <TD ROWSPAN=5> <IMG SRC="images/largelogo_starfish.gif" ALT="" WIDTH=304 HEIGHT=321 border="0" usemap="#Map3">
+		  <br><center></center></TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/2_nodetail.gif" WIDTH=384 HEIGHT=61 ALT="">
+		<div class="menu" style="padding-top:23pt;padding-left:30pt"><a href="index.html">Summary</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="download.html">Download</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;Tutorial&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="screenshots.html">Screenshots</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="documentation.html">Docs</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="api/index.html">Javadocs</a>&nbsp; </div>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<IMG SRC="http://larvalabs.com/oldimages/3.gif" WIDTH=384 HEIGHT=34 ALT=""></TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/4_noline.gif" WIDTH=384 HEIGHT=74 ALT="">
+		<div style="padding-top:5pt;padding-left:40pt;padding-right:15pt">
+		We assume that you have a working copy of Java (version 1.4 or later) installed on your computer. Once you have that,
+<a href="download.html">download</a> a copy of Starfish and put it somewhere on your system. Once you've done that,
+the starfish.bat (Windows) batch file or starfish.sh (Unix) script will start Starfish on your system.
+<p>
+Adding the "-gui" flag to this script will allow you to see the progress of the grid via the interface.
+<p>
+</div>
+		</TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/5.gif" WIDTH=384 HEIGHT=99 ALT="">
+		<div style="padding-top:5pt">
+		<table width="100%" border="0">
+</table>
+
+		</div>
+		</TD>
+	</TR>
+</TABLE></TD>
+		<TD ROWSPAN=3>
+			<IMG SRC="http://larvalabs.com/oldimages/r.gif" WIDTH=42 HEIGHT=660 ALT=""></TD>
+	</TR>
+
+
+	<TR>
+
+    <TD COLSPAN=2><TABLE WIDTH=688 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+
+<!-- ** Project details ** -->
+	<TR>
+
+<!-- Project type header -->
+		<TD bgcolor="FFFFFF" WIDTH=200 HEIGHT=121 ALT="">
+			          <div style="margin:10px 45px 15px 45px;width:598px;">
+
+<span class="heading">Some Quick Terminology</span><br>
+<p>
+The following terms are used frequently in the remainder of this tutorial:
+<ul>
+
+ <li><b>Grid</b> - The group of nodes that are running Starfish.
+ <li><b>Node</b> - Each process that is a member of the grid is called a <b>node</b>.
+ <li><b>Algorithm</b> - This is a program that can be run on Starfish. For example, the Mandelbrot Algorithm computes Mandelbrot Set images.
+ <li><b>Problem</b> - This is a task that a user creates on the grid for processing.
+  It is an incarnation of an algorithm and some user-specified parameters.
+ <li><b>Library</b> - A library is a set of algorithms bundled in to a jar file.
+  These can be dynamically loaded by Starfish and used for problems.
+
+</ul>
+<p>
+<span class="heading">Web Interface</span><br>
+<p>
+Starfish can be conveniently controlled from a web browser. Simply point your browser at http://<code>HOST</CODE>:22222.
+If you are running Starfish on the same machine as your browser, then this would be http://localhost:22222.
+<p>
+There are three main sections of the web interface. The first is the <b>Home</b> screen. This shows some statistics for the
+grid and shows the problems that are currently loaded on to the grid. Results for completed problems are available here, and new
+problems can be created from here.
+Next is the <b>Problems</b> section. This shows the details of each problem, including the user-specified parameters for each.
+Results for problems are also available here, and new problems can be created.
+Last is the <b>Grid</b> section, which presents some statistics for the grid as a whole and allows the user to control remote nodes.
+
+<p>
+<span class="subheading">Starting a Problem</span><br>
+<p>
+To start a new problem, click on the <b>Add Problem...</b> link on either the Home or Problems screen.
+Next, select the algorithm you wish to use. Let's choose the <b>Mandelbrot Algorithm</b>.
+The web interface now presents a list of parameters. Let's enter the following parameter values:
+<table border="1">
+<tr><td>Problem Name:</td><td>Mandelbrot Test</td></tr>
+<tr><td>Width:</td><td>800</td></tr>
+
+<tr><td>Height:</td><td>800</td></tr>
+<tr><td>LeftX:</td><td>-2</td></tr>
+<tr><td>RightX:</td><td>2</td></tr>
+<tr><td>TopY:</td><td>2</td></tr>
+<tr><td>BottomY:</td><td>-2</td></tr>
+<tr><td>MaxIterations:</td><td>1000</td></tr>
+
+</table>
+Then click <b>Add Problem</b>. The problem is now added to the grid and its progress can be monitored using the web
+interface. Click on either the <b>Home</b> or <b>Problems</b> link to do this.
+Refresh the browser page to observe the progress. Once it is complete, there will be a link to download the
+result. The result in this case will be a PNG image.
+<p>
+<span class="subheading">Controlling Problems</span><br>
+<p>
+Controlling problems is fairly self-explanatory. <b>Pause</b>, <b>Resume</b> and <b>Cancel</b> links are available for
+each problem. Problems are computed in the order they were added, so if a newly problem is more important than existing
+problems, then those can be paused to make way for the high-priority problem.
+
+<p>
+It is a good idea to delete problems once the answer has been obtained so as to free up the resources it used.
+<p>
+<span class="subheading">Adding a Library</span><br>
+<p>
+The above example uses the Mandelbrot Algorithm. This is an example algorithm that comes with Starfish.
+However, users will typically have their own algorithms that they wish to run.
+These are packaged in to <b>library</b> jar files. See the section below on <a href="tutorial.html#implement">How to Implement Your Own Algorithm</a> if you
+don't yet have a library file.
+<p>
+To run a problem using an algorithm for a new library, click on <b>Add Problem...</b> just as was done in the above example.
+Then, click on the <b>Add Library...</b> link. The web interface will ask you to upload the library file. Click <b>Browse...</b>
+
+and then choose the library jar file. Then hit <b>Submit</b>. The library should then be parsed and scanned. A brief report
+of what algorithms added will result if the library load was successful. Click <b>OK</b> and the algorithm selection screen
+will return. However, this time it will include the newly-loaded algorithms. This library-adding step does not need to be
+repeated; subsequent problems can draw on these new algorithms.
+<p>
+<span class="heading">Command-line Usage</span><br>
+<p>
+Starfish can also be controlled from the command line if the web interface is not convenient.
+The following commands can be entered into the terminal window:
+<ol>
+<li><b>quit</b> Shutdown node.
+<li><b>show</b> Show a list of all resources this node is storing and their IDs.
+
+<li><b>view</b> View a list of grid members.
+<li><b>problems</b> Show a list of problems current being computed or on the queue.
+<li><b>state</b> Show the state of all running problems including their segment completion status.
+<li><b>result [name of problem]</b> Retrieve the result from the problem named and allow the grid to clear resources used by that problem.
+<li><b>restart</b> Restart all nodes in the grid.
+</ol>
+<p>
+
+<span class="heading">An Example Command-Line Session</span><br>
+<p>
+What follows is an example session of Starfish. In this example, one node has already been started with
+the <code>starfish.(sh/bat)</code> file and is waiting to process segments. The second instance is started with <code>runsleep.(sh/bat)</code>,
+which starts a node and also triggers a SleepAlgorithm problem to start.
+What is shown below is the output from the first node started, words in <span class="command">red</span>
+are commands entered by the user.
+<div class="codescroll"><pre>[main]2005-02-10 13:20:41,799  INFO (Node.java:647) - Starting HTTP server on port 22222.
+13:20:41.924 EVENT  Starting Jetty/4.2.23
+13:20:41.971 EVENT  Started HttpContext[/]
+13:20:41.971 EVENT  Started SocketListener on 0.0.0.0:22222
+13:20:41.971 EVENT  Started org.mortbay.http.HttpServer@1ef9f1d
+[main]2005-02-10 13:20:42,252  INFO (JGroupsCommunications.java:38) - ... done, connected.
+
+-------------------------------------------------------
+GMS: address is 192.168.1.173:2563
+-------------------------------------------------------
+[PullPushAdapterThread]2005-02-10 13:20:44,314  INFO (JGroupsCommunications.java:74) - Member joined: 192.168.1.173:2563
+[NodeListener]2005-02-10 13:20:44,330  INFO (StartNodeMessage.java:15) - Node has been briefed by leader, ready to begin processing.
+> <span class="command">show</span>
+No resources.
+> <span class="command">view</span>
+
+View:
+  192.168.1.173:2563 (leader)
+1 nodes.
+> [PullPushAdapterThread]2005-02-10 13:22:17,486  INFO (JGroupsCommunications.java:74) - Member joined: 192.168.1.173:2573
+[PullPushAdapterThread]2005-02-10 13:22:37,252  INFO (JGroupsCommunications.java:91) - Member left: 192.168.1.173:2573
+[PullPushAdapterThread]2005-02-10 13:22:51,830  INFO (JGroupsCommunications.java:74) - Member joined: 192.168.1.173:2579
+[NodeRunner]2005-02-10 13:22:53,721  INFO (NodeRunner.java:102) - Segment #0 for problem 4963334e-511a-42c3-821c-12eec7a5f511 received, processing.
+[NodeRunner]2005-02-10 13:22:55,064  INFO (NodeRunner.java:102) - Segment #3 for problem 4963334e-511a-42c3-821c-12eec7a5f511 received, processing.
+[NodeRunner]2005-02-10 13:22:55,174  INFO (NodeRunner.java:102) - Segment #5 for problem 4963334e-511a-42c3-821c-12eec7a5f511 received, processing.
+[NodeRunner]2005-02-10 13:22:55,799  INFO (NodeRunner.java:102) - Segment #6 for problem 4963334e-511a-42c3-821c-12eec7a5f511 received, processing.
+[NodeRunner]2005-02-10 13:22:56,033  INFO (NodeRunner.java:102) - Segment #7 for problem 4963334e-511a-42c3-821c-12eec7a5f511 received, processing.
+[NodeRunner]2005-02-10 13:22:57,064  INFO (NodeRunner.java:102) - Segment #9 for problem 4963334e-511a-42c3-821c-12eec7a5f511 received, processing.
+[NodeRunner]2005-02-10 13:22:57,674  INFO (NodeRunner.java:102) - Segment #8 for problem 4963334e-511a-42c3-821c-12eec7a5f511 received, processing.
+SleepyAlgo results:
+-------------------
+1023
+415
+698
+111
+1316
+625
+203
+991
+1631
+583
+[NodeListener]2005-02-10 13:22:58,174  INFO (Node.java:350) - Problem 'sleepproblem' has completed processing.
+<span class="command">show</span>
+Resources:
+com.larvalabs.starfish.resource.Resource@f30494[7b954e8e-beb0-464a-a6fa-db2347cfaa9f,192.168.1.173:2563,<null>,class com.larvalabs.starfish.engine.ResultResource]
+com.larvalabs.starfish.resource.Resource@1e1be92[4963334e-511a-42c3-821c-12eec7a5f511,192.168.1.173:2579,<null>,class com.larvalabs.starfish.engine.Problem]
+com.larvalabs.starfish.resource.Resource@1f78040[8918a8a9-d3b9-4fa1-9ab2-d5ed220cbb57,192.168.1.173:2579,<null>,class [B]
+com.larvalabs.starfish.resource.Resource@186d484[cb4dcc6e-3cb5-4626-944d-1d48119d3db6,192.168.1.173:2563,4963334e-511a-42c3-821c-12eec7a5f511,class [B]
+4 resources.
+> <span class="command">problems</span>
+Problems:
+  Problem 'sleepproblem': ID: 4963334e-511a-42c3-821c-12eec7a5f511, Algorithm: class com.larvalabs.starfish.examples.SleepAlgorithm
+1 problems.
+> <span class="command">result sleepproblem</span>
+Attempting to get result for problem 'sleepproblem'...
+Result:
+Done.
+> <span class="command">problems</span>
+Problems:
+0 problems.
+>
+
+</pre></div>
+<p>
+<br>
+<span class="heading"><a name="implement"></a>How To Implement Your Own Algorithm</span><br>
+The easiest way to understand what you need to do to run your Algorithm on Starfish is by going through an example.
+We'll make use of the <code>MandelbrotAlgorithm</code> to go step by step through the
+requirements of any Algorithm to be run on Starfish.
+<p>
+<div class="code"><pre>public class MandelbrotAlgorithm extends Algorithm {</pre></div>
+Anything that is supposed to run on Starfish needs to extend the <a href="api/com/larvalabs/starfish/algorithm/Algorithm.html">Algorithm</a> class,
+which then requires you to implement certain methods. These are, as implemented in the <code>MandelbrotAlgorithm</code>:
+
+<p>
+<div class="code"><pre>public String getName() {
+    return "Mandelbrot Algorithm";
+}
+</pre></div>
+Simply returns the name of this Algorithm, it will be known as this in the GUI and web interface.
+This method can be called at any time.
+<p>
+<div class="code"><pre>public void setParameters(ParameterSet ps) {
+    ps.addParameter(new IntegerType(PARAM_WIDTH, DESC_WIDTH, true, 0,
+                                              Integer.MAX_VALUE, null));
+    ps.addParameter(new IntegerType(PARAM_HEIGHT, DESC_HEIGHT, true, 0,
+                                              Integer.MAX_VALUE, null));
+    ps.addParameter(new DoubleType(PARAM_LEFTX, DESC_LEFTX, true, null));
+    ps.addParameter(new DoubleType(PARAM_RIGHTX, DESC_RIGHTX, true, null));
+    ps.addParameter(new DoubleType(PARAM_TOPY, DESC_TOPY, true, null));
+    ps.addParameter(new DoubleType(PARAM_BOTTOMY, DESC_BOTTOMY, true, null));
+    ps.addParameter(new IntegerType(PARAM_MAX_ITERATIONS,
+                                              DESC_MAX_ITERATIONS,
+                                              true, 0,
+                                              Integer.MAX_VALUE, null));
+}
+</pre></div>
+<p>
+This method allows your algorithm to specify what parameters it requires. Parameters are added via the
+<a href="api/com/larvalabs/starfish/algorithm/parameter/ParameterType.html">ParameterType</a> class. There are
+many convenient implementations of this abstract class, some of which are used by the Mandelbrot algorithm above.
+In this case, the Mandelbrot algorithm is specifying the parameters that will govern which part of the set will be generated,
+the maximum iterations, etc. This method can be called at any time.
+<p>
+<div class="code"><pre>public void initialize(Parameters parameters) {
+    width = ((Integer)parameters.getParameter(PARAM_WIDTH)).intValue();
+    height = ((Integer)parameters.getParameter(PARAM_HEIGHT)).intValue();
+    leftX = ((Double)parameters.getParameter(PARAM_LEFTX)).doubleValue();
+    rightX = ((Double)parameters.getParameter(PARAM_RIGHTX)).doubleValue();
+    topY = ((Double)parameters.getParameter(PARAM_TOPY)).doubleValue();
+    bottomY = ((Double)parameters.getParameter(PARAM_BOTTOMY)).doubleValue();
+    maxIterations = ((Integer)parameters.getParameter(PARAM_MAX_ITERATIONS))
+                        .intValue();
+}
+</pre></div>
+<p>
+The parameters required by your Algorithm will be passed into the <code>initialize</code> method so you can set
+up your object level variables with the correct values. This method will be called before any of the methods below.
+
+<p>
+<div class="code"><pre>public int totalNumberOfSegments() {
+    return DEFAULT_SEGMENTS;
+}
+</pre></div>
+<p>
+In this method you need to return how many segments your problem is going to break down into for distribution to
+the grid. In this algorithm's case there is a fixed number of segments no matter the parameters, but other algorithms
+might have a more complicated formula for determining how many segments are going to be required, for example:
+<p>
+<div class="code"><pre>public int totalNumberOfSegments() {
+    return (int) Math.pow(baseChars.length, segmentStartCharacters);
+}
+</pre></div>
+<p>
+In this case the algorithm is going to make a number of segments related to the number of characters that it
+needs to search through to find the answer. In many cases you'll decide how many segments are required based on
+the size of the input data or other parameters of the problem.
+<p>
+<div class="code"><pre>public Serializable processSegment(int segmentNum, Object segmentParameters) {</pre></div>
+<p>
+This is the method that does the actual computation of a segment. You are given the number of the segment the
+grid wants you to process and any specific parameters for that segment. In this case of the <code>MandelbrotAlgorithm</code>
+
+it uses the segment number to simply calculate what part of the image it should work on, as in:
+<p>
+<div class="code"><pre>int startY = segmentNum * height / DEFAULT_SEGMENTS;
+int endY = (segmentNum + 1) * height / DEFAULT_SEGMENTS;
+</pre></div>
+<p>
+But other types of algorithms will need to do different things with this segment number. For example, a sequence
+alignment algorithm would probably want to determine which part of the source data it should be doing it's alignment
+against based on the chunk number.
+<p>
+<div class="code"><pre>public ProblemResult processResults(Uuid[] results, Resources resources) {</pre></div>
+<p>
+Finally we come to processing the data once the entire range of segments has been computed. This method will be called
+on one of the nodes in the grid and is responsible for processing all individual results into the final form of the
+problem. For example in the Mandelbrot example this method results in the writing of an image file. In the case of the
+sequence alignment example, this method takes all the best matches found and orders them to show the top global matches.
+The results are provided as an array of Uuid's which can be turned into actual data by requesting that the grid find
+the data for you with a line like
+<p>
+<div class="code"><pre>int[][] data = (int[][]) resources.getResource(results[i]);</pre></div>
+<p>
+As the algorithm you know what format your results should be coming back to you in, so in this case the Mandelbrot
+algorithm knows to cast it into an array of int's. Note that in most cases during normal operation the grid will
+preload the results onto the node that will eventually process the results. This means that most of the calls to
+
+<code>getResource()</code> will result in the data loading from the local cache of the node, making things run
+much quicker than streaming them over the network during processing.
+<p>
+See the <a href="documentation.html">full documentation</a> for more information about what happens to your Algorithm when it runs.
+</div>
+    	</TD>
+<!-- Individual Project -->
+
+	</TR>
+<!-- ** Project details ** -->
+
+	<TR>
+		<TD COLSPAN=4>
+			<IMG SRC="http://larvalabs.com/oldimages/12.gif" WIDTH=688 HEIGHT=45 ALT=""></TD>
+	</TR>
+</TABLE></TD>
+	</TR>
+	<tr><td colspan="4" height="50%" bgcolor="666666"><img src="http://larvalabs.com/oldimages/spacer.gif"></td></tr>
+
+
+
+</TABLE>
+</center>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-191940-2";
+urchinTracker();
+</script>
+</body>
+</HTML>

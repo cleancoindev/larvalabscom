@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>larvalabs</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<link REL="STYLESHEET" TYPE="text/css" HREF="http://larvalabs.com/css/main.css" Title="main">
+
+</HEAD>
+<BODY BGCOLOR=#666666 LEFTMARGIN=0 TOPMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<center>
+<br><br>
+<TABLE WIDTH=770 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+<tr><td colspan="4" bgcolor="666666"><img src="http://larvalabs.com/oldimages/spacer.gif"></td></tr>
+	<TR>
+		<TD ROWSPAN=3>
+			<IMG SRC="http://larvalabs.com/oldimages/l.gif" WIDTH=40 HEIGHT=660 ALT=""></TD>
+		
+    <TD COLSPAN=2 BGCOLOR="FFFFFF"><TABLE WIDTH=688 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+	<TR>
+		<TD>
+			<a href="http://larvalabs.com/index.html"><IMG SRC="http://larvalabs.com/oldimages/larvalogo_top.gif" border="0" WIDTH=384 HEIGHT=53 ALT="Homepage"></a></TD>
+		  <TD ROWSPAN=5> <IMG SRC="images/largelogo_starfish.gif" ALT="" WIDTH=304 HEIGHT=321 border="0" usemap="#Map3">
+		  <br><center></center></TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/2_nodetail.gif" WIDTH=384 HEIGHT=61 ALT="">
+		<div class="menu" style="padding-top:23pt;padding-left:30pt"><a href="index.html">Summary</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="download.html">Download</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="tutorial.html">Tutorial</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="screenshots.html">Screenshots</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;Docs&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="api/index.html">Javadocs</a>&nbsp; </div>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<IMG SRC="http://larvalabs.com/oldimages/3.gif" WIDTH=384 HEIGHT=34 ALT=""></TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/4_noline.gif" WIDTH=384 HEIGHT=74 ALT="">
+		<div style="padding-top:5pt;padding-left:40pt;padding-right:15pt">
+		Please be sure to read the <a href="tutorial.html">Tutorial</a> section before reading this section.
+<p>
+This section contains detailed documentation regarding the configuration of Starfish and the implementation of
+Algorithms.
+</div>
+		</TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/5.gif" WIDTH=384 HEIGHT=99 ALT="">
+		<div style="padding-top:5pt">
+		<table width="100%" border="0">
+</table>
+
+		</div>
+		</TD>
+	</TR>
+</TABLE></TD>
+		<TD ROWSPAN=3>
+			<IMG SRC="http://larvalabs.com/oldimages/r.gif" WIDTH=42 HEIGHT=660 ALT=""></TD>
+	</TR>
+
+
+	<TR>
+
+    <TD COLSPAN=2><TABLE WIDTH=688 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+
+<!-- ** Project details ** -->
+	<TR>
+
+<!-- Project type header -->
+		<TD bgcolor="FFFFFF" WIDTH=200 HEIGHT=121 ALT="">
+			          <div style="margin:10px 45px 15px 45px;width:598px;">
+
+<span class="subheading">Configuration</span><br>
+<p>
+For most hardware configurations, Starfish should work fine with default settings. However, there are a few special
+siutations that could arise.
+
+<p>
+The file <code>starfish.properties</code> contains five configuration properties:
+<table border="1">
+<tr><td>Property</td><td>Default Value</td><td>Description</td></tr>
+<tr>
+<td><code>channel.multicast.ip</code></td>
+<td><code>232.11.11.232</code></td>
+
+<td>
+This is the mutlicast IP address over which the grid will co-ordinate and communicate.
+This can be changed (along with <code>channel.group.name</code>) in order to have independent Starfish grids
+operating on one LAN.
+</td>
+</tr>
+<tr>
+<td><code>channel.group.name</code></td>
+<td><code>LarvaLab</code></td>
+<td>
+
+This is the group name used by the underlying JGroups layer to co-ordinate the grid. It is not necessary to change
+this, but it can be used to run independent Starfish grids on one LAN.
+</td>
+</tr>
+<tr>
+<td><code>resource.redundancy</code></td>
+<td><code>1</code></td>
+<td>
+This parameter sets the desired level of resource redundance on the grid. With the default setting, each node will
+attempt to maintain a copy of all its resources on a single neighboring node. With a value of 2, it will attempt to
+maintain two copies, etc. A value of 0 turns all resource redundancy off. This will reduce network traffic,
+but use this only in a very high-availability environment. For most normal situations, the default redundancy level
+will suffice.
+</td>
+</tr>
+
+<tr>
+<td><code>channel.properties.pre</code></td>
+<td><i>Large value omitted</i></td>
+<td>JGroups uses a property string to configure its protocol stack. In Starfish, this string is the concatenation of
+the values <code>channel.properties.pre</code>, <code>channel.multicast.ip</code> and <code>channel.properties.post</code>.
+So, this parameter and <code>channel.properties.post</code> can be used to configure the behavior of the JGroups protocol
+stack. Visit the <a href="http://jgroups.org">JGroups site</a> to learn more about these configuration strings.
+</td>
+
+</tr>
+<tr>
+<td><code>channel.properties.post</code></td>
+<td><i>Large value omitted</i></td>
+<td>See above.</td>
+</tr>
+</table>
+A few other configuration options are available in the file <code>launcher.xml</code>. If a Starfish host has more
+than one ethernet adapter, then the user can specify which adapater to use by uncommenting the line:
+
+<pre>
+&lt;sysproperty key="bind.address" value="127.0.0.1"/&gt;
+</pre>
+And replace <code>127.0.0.1</code> with the IP address to which the ethernet adapter is bound.
+<p>
+Finally, the launcher.xml file has configured Starfish for "headless" hosts (hosts with no video).
+Removing the following line will configure Starfish for hosts with video capability:
+<pre>
+&lt;jvmarg value="-Djava.awt.headless=true"/&gt;
+</pre>
+<p>
+<span class="subheading">Lifecycle of an Algorithm</span><br>
+
+<p>
+This section explains the details of how the Algorithm class is used by Starfish.
+This information should help developers create Algorithm implementations.
+<p>
+Algorithms are instantiated using reflection. They must have no-argument constructors.
+There are four different ways in which an Algorithm object will be instantiated and used:
+<p>
+<b>Template Instances</b><br>
+When using the web interface, a user will select an Algorithm, and then enter the parameters for their particular problem.
+These will be validated before the problem is loaded on the grid and run. The Algorithm selection and parameter validation
+are done using a <b>template instance</b> of each Algorithm. A template instance will result in the following methods
+being called:
+<ul>
+<li><code>java.lang.String getName()</code>
+<li><code>void setParameters(ParameterSet parameterSet)</code>
+
+</ul>
+These methods can be called any number of times and in any order. However, this is all that will happen to a template
+instance. It is otherwise unused.
+<p>
+<b>Input Data Instance</b><br>
+Once the problem parameters have been validated by the template instance, a new instance is created for the purpose of
+creating the segment input data. The following methods are called on this instance (in order):
+<ol>
+<li><code>void setParameters(ParameterSet parameterSet)</code>
+<li><code>int totalNumberOfSegments()</code>
+<li><code>void initialize(Parameters parameters)</code>
+<li><code>void generateSegmentInputData(SegmentInputData segmentInputData)</code>
+
+</ol>
+Note that this instance is only created once per problem, and only on the node on which the user created the
+problem.
+<p>
+<b>Processing Instances</b><br>
+Once a problem is operating on the grid, each node will create an instance of the Algorithm and process segments.
+The processing instance accomplishes this using the methods (called in order):
+<ol>
+<li><code>void initialize(Parameters parameters)</code>
+<li><code>java.io.Serializable processSegment(int segmentNum, java.lang.Object segmentParams)</code>
+</ol>
+<p>
+<b>Co-ordinator Instance</b><br>
+
+Once all segments of a problem have completed processing, one of the processing instances will become the
+<b>co-ordinating instance</b>. The grid will ensure that it has all the segment results available to it. Then, it will
+process the results by calling the method:
+<ul>
+<li><code>ProblemResult processResults(Uuid[] resultIds, Resources resources)</code>
+</ul>
+<p>
+<span class="subheading">Algorithm Implementation Notes</span><br>
+Here are a few additional pointers for Algorithm developers.
+<p>
+Starfish allows the developer to determine how to segment their algorithm. Too few segments will result in poor
+scalability, as there may be more nodes than segments available for much of the processing time. However, too many
+segments can introduce a lot of overhead and network traffic. The developer should aspire to achieve roughly the same
+number of segments regardless of the input to the Algorithm. Typically a good number is somewhere on the order 1000.
+<p>
+Starfish is designed to scale to very large problems. The expectation is that any one segment is manageable on an
+"average" computer with modest memory size. However, the results of all segments may be larger than can fit in to the
+main memory of any single host (specifically, the host that is running the co-ordinator instance). Starfish handles this by persisting segment results out to disk
+when not in use. However, it is up to the developer to ensure that the <code>processResults</code> method does not utilize
+all segment results at once if they are very large objects. For example, in the Mandelbrot Fly-Through Algorithm,
+each segment result is a video frame. It is job of the <code>processResults</code> method to combine each of these frames
+in to a single video file. Instead of loading all frames in to memory before processing, the method streams each frame
+individually through the video encoder.
+This allows Starfish to reclaim the memory for segment results that have already been processed.
+
+<p>
+Starfish utilizes the Apache Commons-Logging framework. You can use this logging framework in your algorithms.
+<p>
+<span class="subheading">Complete Example Algorithm</span><br>
+<p>
+For those who learn best from example, the source code for a complete Algorithm implementation is available
+<a href="java/com/larvalabs/starfish/examples/sequence/JAlignAlgorithm.java.html">here</a>.
+<p>
+<span class="heading">Credits</span><br>
+<p>
+Starfish was developed by <a href="http://tronics.org/watkinson">John Watkinson</a> and <a href="http://streamsicle.com/matthall">Matt Hall</a>.
+
+</div>
+    	</TD>
+<!-- Individual Project -->
+
+	</TR>
+<!-- ** Project details ** -->
+
+	<TR>
+		<TD COLSPAN=4>
+			<IMG SRC="http://larvalabs.com/oldimages/12.gif" WIDTH=688 HEIGHT=45 ALT=""></TD>
+	</TR>
+</TABLE></TD>
+	</TR>
+	<tr><td colspan="4" height="50%" bgcolor="666666"><img src="http://larvalabs.com/oldimages/spacer.gif"></td></tr>
+
+
+
+</TABLE>
+</center>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-191940-2";
+urchinTracker();
+</script>
+</body>
+</HTML>

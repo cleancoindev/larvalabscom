@@ -1,0 +1,19 @@
+/** ANDROIDIFY FEATURED CSS **/
+/** larva labs © 2011 **/
+
+/** OVERRIDE PHONE **/
+/*************************************************** FEATURED ANDROID VERTICAL ****************************************/
+div#featured.androidify div#feat_phone {float: right; height: 453px; width: 214px; background: url("../images/phones/feat_androidify_vertical.png") no-repeat center top;
+position: relative; bottom: 10px;
+}
+
+/** IMAGE POSITION **/
+div#featured.androidify div#feat_phone a {display: block; width: 180px; position: relative; left: 18px; top: 61px;}
+div#featured.androidify div#feat_phone a:hover {border: 1px solid #3d86a2; height: 296px; left: 17px; top: 60px;}
+div#featured.androidify a#buylink {position: relative; top: 15px; left: 35px;}
+
+div#featured.androidify div#feat_phone img{width: 180px; height: 296px;}
+
+
+/** ANDROIDIFY DETAILS PAGE **/
+div#android_v.special_androidify {background: url(../images/product_backgrounds/special/androidify_v_standard.jpg) no-repeat 0 0;}

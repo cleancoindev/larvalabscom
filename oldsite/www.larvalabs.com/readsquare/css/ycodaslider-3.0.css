@@ -1,0 +1,103 @@
+/* YCODASLIDER 3.0 */
+
+/* TROPPO SECCO: div.yslider-wrap *{margin: 0; padding: 0;} */
+a:focus { outline:none }
+
+div.ycodaslider {
+    color: #000;
+    width: 838px;
+    margin: 0 auto;
+    text-align: center;
+	}
+
+div.ycodaslider div.yslider-wrap { 
+/* This div isn't entirely necessary but good for getting the side arrows vertically centered */
+    position: relative;
+    width: 100%; 
+	}
+
+
+div.yslider-viewer { /* This is the viewing window */
+    position: relative;
+    margin: 0 auto;
+    height: 533px;
+    clear: both;
+    overflow: hidden; /* comment for debug */
+    width: 838px;     /* 1000 for debug; Also specified in  div.yslider-viewer div.yslider-container div.yslider-panel  below */
+	}
+
+div.yslider-viewer div.yslider-container { 
+/* This is the big long container used to house your end-to-end divs. 
+   Width is calculated and specified by the JS  */
+    position: relative;
+    left: 0; top: 0;
+    width: 100%;
+    list-style-type: none;
+    /* -moz-user-select: none; // This breaks CSS validation but stops accidental (and intentional - beware) panel highlighting in Firefox. Some people might find this useful, crazy fools. */
+}
+
+div.yslider-viewer div.yslider-container div.yslider-panel { 
+/* Each panel is arranged end-to-end */
+    float:left;
+    height: 100%;
+    position: relative;
+    width: 838px; /* Also specified in  div.yslider-viewer  above */
+}
+
+div.yslider-viewer div.yslider-container div.yslider-panel div.yslider-panelwrapper { 
+/* Wrapper to give some padding in the panels, without messing with existing panel width */
+	margin: 0 auto;
+	padding: 0;
+ }
+ 
+ 
+div.yslider-nav { /* This is the div to hold your nav (the UL generated at run time) */
+    margin: auto;
+}
+div.yslider-nav ul { /* The auto-generated set of links */
+    list-style: none;
+    margin: 0; padding: 0;/* RESET */ 
+	width: 120px;
+	position: absolute; 
+	bottom: 40px; 
+	left: 380px;
+}
+div.yslider-nav ul li {
+    float: left;
+    margin-right: 10px; /* If you change this, be sure to adjust the initial value of navWidth in slideviewer.js */
+    list-style-type:none;
+}
+div.yslider-nav a { /* The nav links */
+	background: url(../images/dots.jpg) no-repeat 0 0;
+	display: block;
+    width: 12px;
+	height: 12px; 
+	overflow: hidden;
+	text-indent: -9999px;
+}
+div.yslider-nav a:hover {
+    background-position: -12px 0;
+}
+div.yslider-nav a.current {
+    background-position: -24px 0;
+}
+div.yslider-navl, div.yslider-navr { /* The left and right arrows */
+   display: none;
+}
+div.yslider-navl a, div.yslider-navr a {
+    display: block;
+    height: 40px;
+    width: 40px;
+}
+div.yslider-navl {
+    left: 0;
+}
+div.yslider-navr {
+    right: 0;
+}
+div.yslider-navl {
+    background: url("http://www.larvalabs.com/readsquare/css/images/left.png") no-repeat center;
+}
+div.yslider-navr {
+    background: url("http://www.larvalabs.com/readsquare/css/images/right.png") no-repeat center;
+}

@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>larvalabs</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<link REL="STYLESHEET" TYPE="text/css" HREF="http://larvalabs.com/css/main.css" Title="main">
+
+</HEAD>
+<BODY BGCOLOR=#666666 LEFTMARGIN=0 TOPMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<center>
+<br><br>
+<TABLE WIDTH=770 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+<tr><td colspan="4" bgcolor="666666"><img src="http://larvalabs.com/oldimages/spacer.gif"></td></tr>
+	<TR>
+		<TD ROWSPAN=3>
+			<IMG SRC="http://larvalabs.com/oldimages/l.gif" WIDTH=40 HEIGHT=660 ALT=""></TD>
+		
+    <TD COLSPAN=2 BGCOLOR="FFFFFF"><TABLE WIDTH=688 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+	<TR>
+		<TD>
+			<a href="http://larvalabs.com/index.html"><IMG SRC="http://larvalabs.com/oldimages/larvalogo_top.gif" border="0" WIDTH=384 HEIGHT=53 ALT="Homepage"></a></TD>
+		  <TD ROWSPAN=5> <IMG SRC="images/largelogo_swarmcache.gif" ALT="" WIDTH=304 HEIGHT=321 border="0" usemap="#Map3">
+		  <br><center></center></TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/2_nodetail.gif" WIDTH=384 HEIGHT=61 ALT="">
+		<div class="menu" style="padding-top:23pt;padding-left:30pt"><a href="index.html">Summary</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="download.html">Download</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;Tutorial&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="documentation.html">Docs</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="http://swarmcache.sourceforge.net/api/index.html">Javadocs</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="http://sf.net/projects/swarmcache">Project Page</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="http://sourceforge.net/forum/forum.php?forum_id=268479">Help Forums</a>&nbsp;</div>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<IMG SRC="http://larvalabs.com/oldimages/3.gif" WIDTH=384 HEIGHT=34 ALT=""></TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/4_noline.gif" WIDTH=384 HEIGHT=74 ALT="">
+		<div style="padding-top:5pt;padding-left:40pt;padding-right:15pt">
+		This tutorial will help introduce you to the basic concepts and use cases of <strong>SwarmCache</strong>.
+</div>
+		</TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/5.gif" WIDTH=384 HEIGHT=99 ALT="">
+		<div style="padding-top:5pt">
+		<table width="100%" border="0">
+</table>
+
+		</div>
+		</TD>
+	</TR>
+</TABLE></TD>
+		<TD ROWSPAN=3>
+			<IMG SRC="http://larvalabs.com/oldimages/r.gif" WIDTH=42 HEIGHT=660 ALT=""></TD>
+	</TR>
+
+
+	<TR>
+
+    <TD COLSPAN=2><TABLE WIDTH=688 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+
+<!-- ** Project details ** -->
+	<TR>
+
+<!-- Project type header -->
+		<TD bgcolor="FFFFFF" WIDTH=200 HEIGHT=121 ALT="">
+			          <div style="margin:10px 45px 15px 45px;width:598px;">
+<span class="heading">How It Works</span><p/>
+The concept behind SwarmCache is fairly simple. Each server instantiates its own <i>manager</i>. For each type of object that the server wishes to cache, it instantiates a cache and adds it to the manager. The manager joins a multicast group and communicates with other managers in the group. Whenever an object is removed from a cache, the manager notifies all other managers in the group. Those managers then ensure that the object is removed from their respective caches. The result is that a server will not have in its cache a stale version of an object that has been updated or deleted on another server.
+<p>
+Note that the managers only need to communicate when an object is <i>removed</i> from a cache. This only happens when an object is updated or deleted. The managers do not co-operate beyond this. This means that the amount of inter-server communications is proportional to the amount of updates/deletes of the application. As the communications is multicast, it is <b>not</b> proportional to the number of caching hosts. Also notice that there is no "server"; all hosts are equal peers and they can come and go from the cache group as they please without affecting other group members. Thus the operation of the distributed cache is very robust.
+
+<p>
+<span class="heading">Basic Usage</span><p/>
+SwarmCache is designed to be integrated in to the persistence layer of a database-driven Java application. However, it could be useful for other types of applications. Once built in to the persistence engine, SwarmCache should be transparent to higher layers of the software. SwarmCache does not directly support transaction management. This can be accomplished by wrapping the cached objects and storing some additional transaction data. This will described and possibly implemented at a later date.
+<p>
+Swarmcache requires that <code>swarmcache.jar</code>, <code>jgroups-all.jar</code>, <code>commons-collections.jar</code>, and <code>commons-logging.jar</code> (included in the download) be in your classpath.
+<p>
+For most applications, it is sufficient to make use of the <code>CacheFactory</code> class to configure and use SwarmCache. Here is an example:
+
+
+<div class="code"><pre>
+import net.sf.swarmcache.*;
+
+...
+
+CacheFactory cacheFactory;
+
+...
+
+// Configure and Initialize the cache manager
+CacheConfiguration conf = new CacheConfiguration();
+conf.setCacheType(CacheConfiguration.TYPE_LRU);
+cacheFactory = new CacheFactory(conf);
+
+...
+
+// Create a new cache, using a name that describes
+//  what kind of object we will store
+ObjectCache cache = cacheFactory.createCache("People");
+
+...
+
+// Store something in the cache
+String key = "0001";
+String person = "John Watkinson";
+cache.put(key, person);
+
+...
+
+// Retrieve something from the cache
+String person = (String)cache.get("0001");
+System.out.println(person);
+
+...
+
+// Clear an object from the cache
+// (This results in the sending of a
+//  multicast message to other caching hosts)
+cache.clear("0001");
+String person = (String)cache.get("0001");
+// The following will print 'null'
+System.out.println(person);
+</pre></div>
+
+The example is simple, but running this same code on multiple machines in a network will result in their caches being consistent.
+<p>
+Note that the keys used must be serializable objects-- they must implement <code>java.io.Serializable</code>. The objects themselves that are stored in the cache need not be serializable. And of course, the keys should not be large objects for transmission efficiency purposes.
+<p>
+In order to keep keys distinct, it is usually preferred to have one cache per type of object stored. In that case, it makes sense to follow the convention that the cache be named after the fully-qualified class name of the object type to be stored.
+<p>
+<span class="heading">Usage in a Persistence Engine</span><br>
+Here is some skeleton code that demonstrates how SwarmCache could be integrated in to a persistence engine. The following class is responsible for persisting an object of type <code>Person</code>:
+
+<div class="code"><pre>
+public class PersonEntity extends GenericEntity {
+
+	ObjectCache cache;
+
+	public PersonEntity(CacheFactory cacheFactory) {
+		cache = cacheFactory.createCache("Person");
+		// * Other initialization here
+	}
+
+	...
+
+	public Person get(long key) {
+		Long cacheKey = new Long(key);
+		Person person = (Person)cache.get(cachekey);
+		if (person == null) {
+			// * Get the object from the database
+			if (person != null) {
+				// Put it in the cache
+				cache.put(cacheKey, person);
+			}
+		}
+		return person;
+	}
+
+	...
+
+	public void insert(Person person) {
+		// * Do database insert
+		// Add new object to cache
+		Long cacheKey = new Long(person.getKey());
+		cache.put(cacheKey, person);
+	}
+
+	...
+
+	public void update(Person person) {
+		// * Do database update
+		// Remove object from cache
+		// (This causes all caches in the group to be notified)
+		Long cacheKey = new Long(person.getKey());
+		cache.clear(cacheKey);
+		// Re-add the object to the cache
+		cache.put(cacheKey, person);
+	}
+
+	...
+
+	public void delete(long key) {
+		// * Do database delete
+		// Remove object from cache
+		// (This causes all caches in the group to be notified)
+		Long cacheKey = new Long(key);
+		cache.clear(cacheKey);
+	}
+
+	...
+
+}
+</pre></div></div>
+    	</TD>
+<!-- Individual Project -->
+
+	</TR>
+<!-- ** Project details ** -->
+
+	<TR>
+		<TD COLSPAN=4>
+			<IMG SRC="http://larvalabs.com/oldimages/12.gif" WIDTH=688 HEIGHT=45 ALT=""></TD>
+	</TR>
+</TABLE></TD>
+	</TR>
+	<tr><td colspan="4" height="50%" bgcolor="666666"><img src="http://larvalabs.com/oldimages/spacer.gif"></td></tr>
+
+
+
+</TABLE>
+</center>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-191940-2";
+urchinTracker();
+</script>
+</body>
+</HTML>

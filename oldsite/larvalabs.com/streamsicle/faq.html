@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>larvalabs</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<link REL="STYLESHEET" TYPE="text/css" HREF="http://larvalabs.com/css/main.css" Title="main">
+
+</HEAD>
+<BODY BGCOLOR=#666666 LEFTMARGIN=0 TOPMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<center>
+<br><br>
+<TABLE WIDTH=770 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+<tr><td colspan="4" bgcolor="666666"><img src="http://larvalabs.com/oldimages/spacer.gif"></td></tr>
+	<TR>
+		<TD ROWSPAN=3>
+			<IMG SRC="http://larvalabs.com/oldimages/l.gif" WIDTH=40 HEIGHT=660 ALT=""></TD>
+		
+    <TD COLSPAN=2 BGCOLOR="FFFFFF"><TABLE WIDTH=688 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+	<TR>
+		<TD>
+			<a href="http://larvalabs.com/index.html"><IMG SRC="http://larvalabs.com/oldimages/larvalogo_top.gif" border="0" WIDTH=384 HEIGHT=53 ALT="Homepage"></a></TD>
+		  <TD ROWSPAN=5> <IMG SRC="images/largelogo_streamsicle.png" ALT="" WIDTH=304 HEIGHT=321 border="0" usemap="#Map3">
+		  <br><center></center></TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/2_nodetail.gif" WIDTH=384 HEIGHT=61 ALT="">
+		<div class="menu" style="padding-top:23pt;padding-left:30pt"><a href="index.html">Summary</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="download.html">Download</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;FAQ&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="Streamsiclev2.pdf">Docs</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="screenshots.html">Screenshot</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="http://www.sf.net/projects/streamsicle">Project Page</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="http://sourceforge.net/forum/forum.php?forum_id=79745">Help Forums</a>&nbsp;</div>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<IMG SRC="http://larvalabs.com/oldimages/3.gif" WIDTH=384 HEIGHT=34 ALT=""></TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/4_noline.gif" WIDTH=384 HEIGHT=74 ALT="">
+		<div style="padding-top:5pt;padding-left:40pt;padding-right:15pt">
+            <p class="question"><strong>
+            What is Streamsicle?
+                </strong>
+            <p>
+            Streamsicle is a web controlled, streaming MP3 server.  Basically, you point it at the directory containing your MP3 files, then use your web browser to make requests, search the collection, listen to what it's playing, etc.  Streamsicle is written in Java so it can run on lots of platforms, it also contains it's own web server so it's very self sufficient.
+</div>
+		</TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/5.gif" WIDTH=384 HEIGHT=99 ALT="">
+		<div style="padding-top:5pt">
+		<table width="100%" border="0">
+</table>
+
+		</div>
+		</TD>
+	</TR>
+</TABLE></TD>
+		<TD ROWSPAN=3>
+			<IMG SRC="http://larvalabs.com/oldimages/r.gif" WIDTH=42 HEIGHT=660 ALT=""></TD>
+	</TR>
+
+
+	<TR>
+
+    <TD COLSPAN=2><TABLE WIDTH=688 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+
+<!-- ** Project details ** -->
+	<TR>
+
+<!-- Project type header -->
+		<TD bgcolor="FFFFFF" WIDTH=200 HEIGHT=121 ALT="">
+			          <div style="margin:10px 45px 15px 45px;width:598px;">
+
+<p class="question"><strong>
+What can't Streamsicle do?
+                          </strong>
+<p>
+Streamsicle can only play MP3 files, no Ogg Vorbis or whatever the hell wacky format you'd rather be using.  Why can't it do this?  Because we're lazy and only use MP3 files ourselves.
+<p class="question"><strong>
+What is the latest release?
+                          </strong>
+<p>
+2.0, which includes a much nicer interface, smoother streaming and we finally got rid of that odd smell.
+<p class="question"><strong>
+
+How do I install it?
+                          </strong>
+<p>
+The easiest way is to use our web installer, available <a href="http://larvalabs.com/streamsicle/install.html">here</a>.  Currently we have self sufficient, self installing packages for Windows, Mac OS 9 and OS X, Linux and Solaris.  If you want to use Streamsicle on another platform or want to install it yourself, then get the zip or tar file as appropriate, and <a href="http://java.sun.com/j2se/1.3/">install a JDK from Sun</a> or elsewhere.  Right now we recommend the 1.3.1 JDK, although Streamsicle is compatible right back to JDK 1.1.8.  Read the readme in the zip/tar file and you should be on your way.
+<p class="question"><strong>
+How much CPU power does it take to run Streamsicle?</strong>
+<p>
+Not much really.  It takes about 10% of a K6-2 300 under Windows 2000.  Also, it doesn't seem to take much more CPU to stream to more users, the limiting factor is usually bandwidth.
+<p class="question"><strong>
+How stable is Streamsicle?</strong>
+<p>
+V1.0+ is pretty stable.  We've run Streamsicle servers for weeks at a time without restarting them (you can reload the list of files on the server without stopping the server).
+<p class="question"><strong>
+
+What license is Streamsicle released under?</strong>
+<p>
+GPL, although any comments I made in the source are under the Sleep Cat license.  However, I have released the Sleepy Cat license under the GPL.
+<p class="question"><strong>
+Why is there no bitrate setting for the stream?</strong>
+<p>
+Streamsicle only streams MP3 files at their native bitrate.  This is good because the real time re-encoders used for constant bitrate streams are very lossy, especially in the lower end.  The bad part is that you tend to need some bandwidth to stream the songs effectively.
+<p class="question"><strong>
+What ports does Streamsicle use?</strong>
+<p>
+All of the ports can be changed via the fluid.config file, but the defaults are 8080 for the web interface and 4711 for the actual streaming.
+<p class="question"><strong>
+My songs are skipping, what's wrong?</strong>
+<p>
+Well the first thing you should know, is that Streamsicle is having problems at home.  Please go easy on him, he needs us right now.  The next thing you should know, is that some MP3 players have problems with bitrates shifting around while listening to one stream.  We've found Winamp to be the best at handling what Streamsicle puts out.  Secondly, you could be having bandwidth issues.  Does the server you're listening to have enough bandwidth to serve all the listeners?
+<p class="question"><strong>
+A few of my songs sound like Alvin and the Chipmunks, what's wrong?</strong>
+
+<p>
+Check to see if those, or the song before them was mono.  No MP3 player we've found can handle a mono song coming after a stereo one, or vice versa.  The solution?  Ditch the mono songs buddy, it ain't the 70's anymore.
+<p class="question"><strong>
+Where else can I get help?</strong>
+<p>
+Go to the <a href="http://sourceforge.net/forum/forum.php?forum_id=79745">help forum</a>, our response times are usually pretty good.  Also, we have new user documentation thanks to Paul Ward, you can read it <a href="http://streamsicle.sourceforge.net/Streamsiclev2.pdf">here</a>.
+<p class="question"><strong>
+Who wrote Streamsicle?</strong>
+<p>
+The Streamsicle project was created by Matt Hall and John Watkinson. The core streaming engine was adapted from the streaming engine of <a href="http://fluid.sourceforge.net/">Fluid</a>, written by Lars Samuelsson. Streamsicle would never have made it past alpha development without the help of some great contributors. In particular, Dan Heller really carried the torch on this project for a while. The complete list of contributors follows:
+<p>
+
+&nbsp;&nbsp;Dan Heller<br>
+&nbsp;&nbsp;Jordan Share<br>
+&nbsp;&nbsp;Kwan Skinner<br>
+&nbsp;&nbsp;Evan D. Hoffman<br>
+&nbsp;&nbsp;Adam Slayer<br>
+&nbsp;&nbsp;Robin Rosenthal<br>
+&nbsp;&nbsp;Jan Struyf<br>
+&nbsp;&nbsp;Paul C. Ward<br>
+</div>
+    	</TD>
+<!-- Individual Project -->
+
+	</TR>
+<!-- ** Project details ** -->
+
+	<TR>
+		<TD COLSPAN=4>
+			<IMG SRC="http://larvalabs.com/oldimages/12.gif" WIDTH=688 HEIGHT=45 ALT=""></TD>
+	</TR>
+</TABLE></TD>
+	</TR>
+	<tr><td colspan="4" height="50%" bgcolor="666666"><img src="http://larvalabs.com/oldimages/spacer.gif"></td></tr>
+
+
+
+</TABLE>
+</center>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-191940-2";
+urchinTracker();
+</script>
+</body>
+</HTML>

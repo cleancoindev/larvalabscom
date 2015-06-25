@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>larvalabs</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<link REL="STYLESHEET" TYPE="text/css" HREF="http://larvalabs.com/css/main.css" Title="main">
+
+</HEAD>
+<BODY BGCOLOR=#666666 LEFTMARGIN=0 TOPMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<center>
+<br><br>
+<TABLE WIDTH=770 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+<tr><td colspan="4" bgcolor="666666"><img src="http://larvalabs.com/oldimages/spacer.gif"></td></tr>
+	<TR>
+		<TD ROWSPAN=3>
+			<IMG SRC="http://larvalabs.com/oldimages/l.gif" WIDTH=40 HEIGHT=660 ALT=""></TD>
+		
+    <TD COLSPAN=2 BGCOLOR="FFFFFF"><TABLE WIDTH=688 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+	<TR>
+		<TD>
+			<a href="http://larvalabs.com/index.html"><IMG SRC="http://larvalabs.com/oldimages/larvalogo_top.gif" border="0" WIDTH=384 HEIGHT=53 ALT="Homepage"></a></TD>
+		  <TD ROWSPAN=5> <IMG SRC="images/largelogo_starfish.gif" ALT="" WIDTH=304 HEIGHT=321 border="0" usemap="#Map3">
+		  <br><center></center></TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/2_nodetail.gif" WIDTH=384 HEIGHT=61 ALT="">
+		<div class="menu" style="padding-top:23pt;padding-left:30pt">Summary&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="download.html">Download</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="tutorial.html">Tutorial</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="screenshots.html">Screenshots</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="documentation.html">Docs</a>&nbsp;<img src="http://larvalabs.com/oldimages/bullet.gif">&nbsp;<a href="api/index.html">Javadocs</a>&nbsp; </div>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<IMG SRC="http://larvalabs.com/oldimages/3.gif" WIDTH=384 HEIGHT=34 ALT=""></TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/4_noline.gif" WIDTH=384 HEIGHT=74 ALT="">
+		<div style="padding-top:5pt;padding-left:40pt;padding-right:15pt">
+		<strong>Starfish</strong> is a fault tolerant grid computing platform that requires no configuration of members. An easily extendable Algorithm interface allows for the implementation of many types of problems. For example, the base download comes with a large mandelbrot image generator, an MD5 hashed value guesser, and a genetic sequence aligner.
+</div>
+		</TD>
+	</TR>
+	<TR>
+		<TD background="http://larvalabs.com/oldimages/5.gif" WIDTH=384 HEIGHT=99 ALT="">
+		<div style="padding-top:5pt">
+		<table width="100%" border="0">
+</table>
+
+		</div>
+		</TD>
+	</TR>
+</TABLE></TD>
+		<TD ROWSPAN=3>
+			<IMG SRC="http://larvalabs.com/oldimages/r.gif" WIDTH=42 HEIGHT=660 ALT=""></TD>
+	</TR>
+
+
+	<TR>
+
+    <TD COLSPAN=2><TABLE WIDTH=688 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+
+<!-- ** Project details ** -->
+	<TR>
+
+<!-- Project type header -->
+		<TD bgcolor="FFFFFF" WIDTH=200 HEIGHT=121 ALT="">
+			          <div style="margin:10px 45px 15px 45px;width:598px;">
+
+		Main features include:
+<ul>
+<li><b>Serverless operation:</b> In starfish all members of the grid are equal, there is no centralized server or controlling node. Any node can be removed and processing will continue. You can start a problem and retrieve results from anywhere.
+<li><b>Zero config:</b> Starfish is designed to be run with no configuration of grid members. However, a full range of configuration options are available for extreme scale or other specific needs problems.
+<li><b>Fault tolerant:</b> Any grid member can leave or join the grid at any time. Algorithm data as well as finished results are distributed redundantly to other grid nodes in real time, so the work of any grid member can't be lost by it leaving the grid.
+
+<li><b>Simple programming interface:</b> Implementing your algorithm involves writing three methods.
+<li><b>Dynamic code deployment:</b> Any Algorithm you write for Starfish is distributed dynamically to the grid along with any jars your Algorithm requires.
+<li><b>Scalability:</b> Most communication between grid members is direct and switchable so network traffic won't explode with large grid sizes.
+<li><b>Built in virtual memory:</b> Problem size is not limited to a grid member's memory allocation. Objects in use overflow onto disk automatically and transparently.
+<li><b>Distributed garbage collection:</b> Resources no longer needed by any active Algorithm are removed from all grid members automatically.
+<li><b>Problem queueing:</b> Queue multiple problems for execution, they will be executed in order.
+
+<li><b>Platform independence:</b> Take advantage of any machine available, the same Starfish install can run on Windows, Linux, Mac OS X and Solaris.
+<li><b>Dynamic GUI:</b> Overall algorithm progress as well as grid health and stats displayed in real time.
+</ul>
+<p>
+Starfish supports three major types of Algorithms:
+<ol>
+<li><b>Pure computation:</b> Generally no input data other than simple parameters, potentially large results. Algorithm must complete all work segments. (see Madelbrot Set)
+<li><b>Analysis:</b> Generally large input data (i.e. genetic data), potentially large resulting data (i.e. list of close matches). Algorithm must complete all work segments. (see Sequence Alignment)
+<li><b>Search:</b> Any size input data, very small resulting data (i.e. found value at location <i>n</i>). Algorithm will terminate as soon as value is found. (see Hashcode Guesser)
+
+</ol>
+<p>
+Starfish makes uses the following projects:
+<ul>
+<li><a href="http://www.jgroups.org">JGroups</a> for grid membership and communication.
+<li><a href="http://megamap.sf.net">MegaMap</a> for transparent virtual memory (MegaMap was originally developed as part of StarFish then seperated for others to use).
+<li><a href="http://www.cs.umd.edu/hcil/jazz/">Piccolo</a> provides a low level Java2D framework for the GUI.
+<li><a href="http://jaligner.sf.net">JAligner</a> is used for the sequence alignment sample algorithm.
+<li>GUI layout based on research by <a href="http://www.cs.umd.edu/hcil/treemap/">HCIL, University of Maryland</a>.
+
+</ul>
+
+</div>
+    	</TD>
+<!-- Individual Project -->
+
+	</TR>
+<!-- ** Project details ** -->
+
+	<TR>
+		<TD COLSPAN=4>
+			<IMG SRC="http://larvalabs.com/oldimages/12.gif" WIDTH=688 HEIGHT=45 ALT=""></TD>
+	</TR>
+</TABLE></TD>
+	</TR>
+	<tr><td colspan="4" height="50%" bgcolor="666666"><img src="http://larvalabs.com/oldimages/spacer.gif"></td></tr>
+
+
+
+</TABLE>
+</center>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-191940-2";
+urchinTracker();
+</script>
+</body>
+</HTML>
